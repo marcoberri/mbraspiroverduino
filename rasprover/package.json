@@ -1,0 +1,19 @@
+{
+  "name": "Rover",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {"start": "node server.js"},
+  "dependencies": {
+    "express": "latest",
+    "express-minify":"latest",
+		"serialport":"latest",
+		"ejs":"latest",
+		"winston":"latest"
+  },
+  
+  "analyze": true,
+  "engines": {
+    "node": ">=0.10"
+  }
+  
+}
