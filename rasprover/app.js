@@ -20,6 +20,7 @@ app.use(express.methodOverride());
 
 app.use(app.router);
 //app.use(require('express-minify')());
+app.use(express.static(__dirname + '/public'));
 app.use(express.compress());
 
 app.get('/', routesHome.index);
@@ -33,7 +34,7 @@ app.post('/move/stop', routesMove.stop);
 
 app.use(function(err, req, res, next) {
 	logger.error(err.stack);
-	res.send(500, 'Error Page: ' + err.stack);
+	res.jsonp(500, {errror :  err.stack});
 });
 
 app.configure('development', function() {

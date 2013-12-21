@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {"start": "node server.js"},
   "dependencies": {
-    "express": "latest",
+    
+	"express": "latest",
     "express-minify":"latest",
-		"serialport":"latest",
-		"ejs":"latest",
-		"winston":"latest"
+	"serialport":"latest",
+	"ejs":"latest",
+	"winston":"latest"		
   },
   
   "analyze": true,
