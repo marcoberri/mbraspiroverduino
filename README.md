@@ -5,6 +5,10 @@ Dagu5 + Arduino + Raspberry Pi
 
 ============
 
+
+
+============
+
 Hardware
 
 <a href="http://www.pololu.com/product/1551">Dagu Rover 5 Tracked Chassis with Encoders</a> 
@@ -33,11 +37,18 @@ Hardware
 <a href="http://www.ebay.it/itm/Arduino-Breadboard-Jumper-Cable-Wires-65-Cable-Pack-/140922066946">Jumper Cable</a>
 ============
 
+SW Configuration
+
+TO DO
+
+============
+
 HW Configuration
 
 TO DO
 
 ============
+
 Images
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/browser_move_.JPG"/>
