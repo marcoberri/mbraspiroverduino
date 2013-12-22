@@ -4,7 +4,7 @@ var logger = require('../data/logger').logger();
 
 var SerialPort = require("serialport").SerialPort;
 
-var sp = new SerialPort("/dev/ttyACM0", {
+var sp = new SerialPort(config.raspi.port, {
   baudRate: 9600,
   parser: require("serialport").parsers.readline('\n'),
 });
