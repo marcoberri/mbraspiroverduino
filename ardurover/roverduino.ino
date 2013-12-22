@@ -112,19 +112,19 @@ void forward(){
 
   //LEFT_FRONT
   digitalWrite(LEFT_FRONT_PWD, HIGH);  
-  digitalWrite(LEFT_FRONT_DIR, LOW);   
+  digitalWrite(LEFT_FRONT_DIR, HIGH);   
 
   //RIGHT_FRONT
   digitalWrite(RIGHT_FRONT_PWD, HIGH);  
-  digitalWrite(RIGHT_FRONT_DIR, LOW);   
+  digitalWrite(RIGHT_FRONT_DIR, HIGH);   
 
   //LEFT_REAR
   digitalWrite(LEFT_REAR_PWD, HIGH);  
-  digitalWrite(LEFT_REAR_DIR, HIGH);   
+  digitalWrite(LEFT_REAR_DIR, LOW);   
 
   //RIGHT_REAR
   digitalWrite(RIGHT_REAR_PWD, HIGH);  
-  digitalWrite(RIGHT_REAR_DIR, HIGH);   
+  digitalWrite(RIGHT_REAR_DIR, LOW);   
 
   delay(50);                  
 
@@ -178,19 +178,19 @@ void back(){
 
   //LEFT_FRONT
   digitalWrite(LEFT_FRONT_PWD, HIGH);  
-  digitalWrite(LEFT_FRONT_DIR, HIGH);   
+  digitalWrite(LEFT_FRONT_DIR, LOW);   
 
   //RIGHT_FRONT
   digitalWrite(RIGHT_FRONT_PWD, HIGH);  
-  digitalWrite(RIGHT_FRONT_DIR, HIGH);   
+  digitalWrite(RIGHT_FRONT_DIR, LOW);   
 
   //LEFT_REAR
   digitalWrite(LEFT_REAR_PWD, HIGH);  
-  digitalWrite(LEFT_REAR_DIR, LOW);   
+  digitalWrite(LEFT_REAR_DIR, HIGH);   
 
   //RIGHT_REAR
   digitalWrite(RIGHT_REAR_PWD, HIGH);  
-  digitalWrite(RIGHT_REAR_DIR, LOW);   
+  digitalWrite(RIGHT_REAR_DIR, HIGH);   
 
  delay(50);                    
 
@@ -286,15 +286,4 @@ void loop(){
     }
 
   }
-
-
-
-
 }
-
-
-
-
-
-
-
