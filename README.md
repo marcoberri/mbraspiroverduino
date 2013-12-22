@@ -3,9 +3,6 @@ RaspiRoverDuino
 
 Dagu5 + Arduino + Raspberry Pi
 
-============
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/3kZttU3sqc0" frameborder="0" allowfullscreen></iframe>
 
 ============
 
