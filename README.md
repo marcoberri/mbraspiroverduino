@@ -4,9 +4,8 @@ RaspiRoverDuino
 Dagu5 + Arduino + Raspberry Pi
 
 
-============
-
 Hardware
+============
 
 <a href="http://www.pololu.com/product/1551">Dagu Rover 5 Tracked Chassis with Encoders</a> 
 
@@ -30,23 +29,24 @@ Hardware
 
 <a href="http://www.ebay.it/itm/130995862894?ssPageName=STRK:MEWNX:IT&_trksid=p3984.m1497.l2649">Snap Clip 9V Battery</a>
 
-
 <a href="http://www.ebay.it/itm/Arduino-Breadboard-Jumper-Cable-Wires-65-Cable-Pack-/140922066946">Jumper Cable</a>
-============
+
 
 SW Configuration
+============
+
 
 TO DO
-
-============
 
 HW Configuration
+============
+
 
 TO DO
 
+Images
 ============
 
-Images
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/browser_move_.JPG"/>
 
@@ -71,9 +71,11 @@ Images
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/IMAG2282.jpg"/>
 
+Video
 ============
 
-Video
+<a href="https://www.youtube.com/watch?v=3kZttU3sqc0">First Test</a>
+
 
 First Try Prototype:
 
