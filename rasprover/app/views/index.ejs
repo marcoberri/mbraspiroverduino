@@ -19,16 +19,28 @@
 
 <script>
 
-function sendData(op){
-$.ajax({
-  type: "POST",
-  url: "http://192.168.1.12:3000/move/" + op,
-  data: { }
-})
-  .done(function( msg ) {
-   $("#myDivResult").append("<p>" + JSON.stringify(msg) + "</p>");
-  });
-}
+	function sendCamData(op){
+	$.ajax({
+	  type: "POST",
+	  url: "http://192.168.1.12:3000/cam/" + op,
+	  data: { }
+	})
+	  .done(function( msg ) {
+	   $("#myDivResult").append("<p>" + JSON.stringify(msg) + "</p>");
+	  });
+	}
+
+
+	function sendData(op){
+	$.ajax({
+	  type: "POST",
+	  url: "http://192.168.1.12:3000/move/" + op,
+	  data: { }
+	})
+	  .done(function( msg ) {
+	   $("#myDivResult").append("<p>" + JSON.stringify(msg) + "</p>");
+	  });
+	}
 
 </script>
 
@@ -61,6 +73,8 @@ $.ajax({
   	  <div class="row" style="margin-top:80px;">
 		  <div class="col-md-4">
 			<form>
+			
+				<br/>
 				<table>
 					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendData('forward');" style="height:50px;width:100px;" type="button" name="FORWARD" value="FORWARD"/></td><td>&nbsp;</td></tr>
 					<tr><td><input class="btn btn-success" onClick="sendData('left');" style="height:50px;width:100px;" type="button" name="LEFT" value="LEFT"/></td>
@@ -68,8 +82,24 @@ $.ajax({
 					<td><input class="btn btn-success" onClick="sendData('right');" style="height:50px;width:100px;" type="button" name="RIGHT" value="RIGHT"/></td></tr>
 					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendData('back');" style="height:50px;width:100px;" type="button" name="BACK" value="BACK"/></td><td>&nbsp;</td></tr>
 				</table>
-<div id="myDivResult" style="width:200px;">
-</div>
+
+				<br/>
+				<br/>
+				
+				<table>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendCamData('up');" style="height:50px;width:100px;" type="button" name="UP" value="UP"/></td><td>&nbsp;</td></tr>
+					<tr><td><input class="btn btn-success" onClick="sendCamData('left');" style="height:50px;width:100px;" type="button" name="LEFT" value="LEFT"/></td>
+					<td><input class="btn btn-danger" onClick="sendCamData('stop');" style="height:50px;width:100px;" type="button" name="STOP" value="STOP"/></td>
+					<td><input class="btn btn-success" onClick="sendCamData('right');" style="height:50px;width:100px;" type="button" name="RIGHT" value="RIGHT"/></td></tr>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendCamData('down');" style="height:50px;width:100px;" type="button" name="DOWN" value="DOWN"/></td><td>&nbsp;</td></tr>
+				</table>
+
+				
+				<div id="myDivResult" style="width:200px;">
+				
+				</div>
+				
+				
 			</form>
   		</div>
   	
