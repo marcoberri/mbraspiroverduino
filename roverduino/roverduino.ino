@@ -1,14 +1,22 @@
-int LEFT_FRONT_PWD = 2;
-int LEFT_FRONT_DIR = 3;
+#include <Servo.h>
+#include <ctype.h> 
 
-int RIGHT_FRONT_PWD = 4;
-int RIGHT_FRONT_DIR = 5;
+static int LEFT_FRONT_PWD = 2;
+static int LEFT_FRONT_DIR = 3;
 
-int LEFT_REAR_PWD = 6;
-int LEFT_REAR_DIR = 7;
+static int RIGHT_FRONT_PWD = 4;
+static int RIGHT_FRONT_DIR = 5;
 
-int RIGHT_REAR_PWD = 8;
-int RIGHT_REAR_DIR = 9;
+static int LEFT_REAR_PWD = 6;
+static int LEFT_REAR_DIR = 7;
+
+static int RIGHT_REAR_PWD = 8;
+static int RIGHT_REAR_DIR = 9;
+
+static int CAM_LR = 13;
+
+static int camLR = 90;
+Servo servoLR;
 
 void setup()
 {
@@ -23,6 +31,11 @@ void setup()
   pinMode(LEFT_REAR_DIR, OUTPUT);
   pinMode(RIGHT_REAR_PWD, OUTPUT);
   pinMode(RIGHT_REAR_DIR, OUTPUT);
+
+  pinMode(CAM_LR,OUTPUT);
+  servoLR.attach(CAM_LR);
+
+
   Serial.println("SETUP COMPLETE");
 }
 
@@ -170,7 +183,7 @@ void right(){
   digitalWrite(RIGHT_REAR_PWD, HIGH);  
   digitalWrite(RIGHT_REAR_DIR, LOW);   
 
- delay(50);                  
+  delay(50);                  
 
 }
 
@@ -192,7 +205,7 @@ void back(){
   digitalWrite(RIGHT_REAR_PWD, HIGH);  
   digitalWrite(RIGHT_REAR_DIR, HIGH);   
 
- delay(50);                    
+  delay(50);                    
 
 }
 
@@ -214,7 +227,7 @@ void stop(){
   digitalWrite(RIGHT_REAR_PWD, LOW);  
   digitalWrite(RIGHT_REAR_DIR, LOW);   
 
- delay(50);                    
+  delay(50);                    
 
 }
 
@@ -231,7 +244,11 @@ void help(){
   h += "[R] - Right";
   h += "[B] - Back";
   h += "[S] - Stop";
+  h += "[T] - Cam left";
+  h += "[Y] - Cam right";
+  h += "[U] - Cam reset";
   h += "[H] - Help";
+
 
   sendMsg(h, true, "info");
 
@@ -239,51 +256,77 @@ void help(){
 
 void loop(){
 
-     
+  if(camLR >= 180){
+    camLR = 180;
+  }
+
+  if(camLR <= 0){
+    camLR = 0;
+  }
+
   if (Serial.available() > 0) {
-  
-    char ch = Serial.read();
 
-  Serial.println(ch);
 
-    
-    if (ch == 'c' || ch == 'C') 
-    {
+    char ch = toupper(Serial.read());
+
+    Serial.println(ch);
+
+    switch(ch){
+
+
+
+    case 'U' :
+      sendMsg("Call Cam Reset", true, "debug");
+      camLR = 90;
+      servoLR.write(v);
+      break;
+
+    case 'T' :
+      sendMsg("Call Cam Left", true, "debug");
+      camLR = camLR +10;
+      servoLR.write(camLR);
+      break;
+
+    case 'Y' :
+      sendMsg("Call Cam Right", true, "debug");
+      camLR = camLR - 10;
+      servoLR.write(camLR);
+      break;
+
+    case 'C' :
       sendMsg("Call Check", true, "debug");
       check();
-    }
-    else if(ch == 'f' || ch=='F'){
+      break;
+    case 'F' :    
       sendMsg("Call Forward", true, "debug");
       forward();
-    }
-    else if(ch == 's' || ch=='S'){
+      break;
+    case 'S' :    
       sendMsg("Call Stop", true, "debug");
-
       stop();
-    }
-    else if(ch == 'b' || ch=='B'){
+      break;
+    case 'B' :    
       sendMsg("Call Back", true, "debug");
-
-
       back();
-    }
-    else if(ch == 'l' || ch=='L'){
+      break;
+    case 'L' :    
       sendMsg("Call Left", true, "debug");
-
-
       left();
-    }
-    else if(ch == 'r' || ch=='R'){
+      break;
+    case 'R' :    
       sendMsg("Call Right", true, "debug");
-
       right();
-    }
-
-    else if(ch == 'h' || ch=='H'){
+      break;
+    case 'H' :    
       sendMsg("Call Help", true, "debug");
-
       help();
+      break;
     }
 
   }
 }
+
+
+
+
+

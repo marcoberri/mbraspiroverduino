@@ -22,7 +22,6 @@ Hardware
 App Configuration
 --------------
 
-TO DO
 
 SW Configuration
 --------------
@@ -35,6 +34,9 @@ TO DO
 HW Configuration
 --------------
 
+Arduino
+- Channel 13 - Tilt Pan Left-Right
+- Channle 12 - Tilt Pan Upper-Down
 
 TO DO
 
