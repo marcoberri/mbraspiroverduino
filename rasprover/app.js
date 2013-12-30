@@ -4,6 +4,7 @@ var express = require('express');
 var logger = require('./app/data/logger').logger();
 var routesHome = require('./app/routes/');
 var routesMove = require('./app/routes/move');
+var routesCam = require('./app/routes/cam');
 
 var app = express();
 
@@ -31,6 +32,10 @@ app.post('/move/right', routesMove.right);
 app.post('/move/back', routesMove.back);
 app.post('/move/forward', routesMove.forward);
 app.post('/move/stop', routesMove.stop);
+
+app.post('/cam/reset', routesCam.reset);
+app.post('/cam/left', routesCam.left);
+app.post('/cam/right', routesCam.right);
 
 app.use(function(err, req, res, next) {
 	logger.error(err.stack);

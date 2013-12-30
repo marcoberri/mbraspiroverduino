@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Move Raver with Dagu 5 with RaspberryPi and Arduino">
+    <meta name="author" content="Marco Berri">
      <title>RaspiRoverDuino</title>
 
     <!-- Bootstrap core CSS -->
@@ -19,27 +19,30 @@
 
 <script>
 
+	function addLog(msg){
+		$("#myDivResult").append("<tr><td>" + new Date().toUTCString() + "</td><td>" + JSON.stringify(msg) + "</td></tr>");
+	}
+	
+	
+	function send(op,url){
+		$.ajax({
+		  type: "POST",
+		  url: url + op,
+		  data: { }
+		})
+		  .done(function( msg ) {
+			addLog(msg);
+		  });
+	
+	}
+	
 	function sendCamData(op){
-	$.ajax({
-	  type: "POST",
-	  url: "http://192.168.1.12:3000/cam/" + op,
-	  data: { }
-	})
-	  .done(function( msg ) {
-	   $("#myDivResult").append("<p>" + JSON.stringify(msg) + "</p>");
-	  });
+		return send(op,"http://192.168.1.12:3000/cam/");
 	}
 
 
 	function sendData(op){
-	$.ajax({
-	  type: "POST",
-	  url: "http://192.168.1.12:3000/move/" + op,
-	  data: { }
-	})
-	  .done(function( msg ) {
-	   $("#myDivResult").append("<p>" + JSON.stringify(msg) + "</p>");
-	  });
+		return send(op,"http://192.168.1.12:3000/move/");
 	}
 
 </script>
@@ -62,7 +65,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <!-- li class="active"><a href="#">Home</a></li-->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -73,9 +76,9 @@
   	  <div class="row" style="margin-top:80px;">
 		  <div class="col-md-4">
 			<form>
-			
-				<br/>
-				<table>
+	
+				<h3>Move</h3>
+				<table class="table table-condensed">
 					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendData('forward');" style="height:50px;width:100px;" type="button" name="FORWARD" value="FORWARD"/></td><td>&nbsp;</td></tr>
 					<tr><td><input class="btn btn-success" onClick="sendData('left');" style="height:50px;width:100px;" type="button" name="LEFT" value="LEFT"/></td>
 					<td><input class="btn btn-danger" onClick="sendData('stop');" style="height:50px;width:100px;" type="button" name="STOP" value="STOP"/></td>
@@ -83,26 +86,24 @@
 					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendData('back');" style="height:50px;width:100px;" type="button" name="BACK" value="BACK"/></td><td>&nbsp;</td></tr>
 				</table>
 
-				<br/>
-				<br/>
-				
-				<table>
+				<h3>Cam</h3>
+				<table class="table table-condensed">
 					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendCamData('up');" style="height:50px;width:100px;" type="button" name="UP" value="UP"/></td><td>&nbsp;</td></tr>
 					<tr><td><input class="btn btn-success" onClick="sendCamData('left');" style="height:50px;width:100px;" type="button" name="LEFT" value="LEFT"/></td>
-					<td><input class="btn btn-danger" onClick="sendCamData('stop');" style="height:50px;width:100px;" type="button" name="STOP" value="STOP"/></td>
+					<td><input class="btn btn-danger" onClick="sendCamData('reset');" style="height:50px;width:100px;" type="button" name="RESET" value="RESET"/></td>
 					<td><input class="btn btn-success" onClick="sendCamData('right');" style="height:50px;width:100px;" type="button" name="RIGHT" value="RIGHT"/></td></tr>
 					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendCamData('down');" style="height:50px;width:100px;" type="button" name="DOWN" value="DOWN"/></td><td>&nbsp;</td></tr>
 				</table>
 
-				
-				<div id="myDivResult" style="width:200px;">
-				
-				</div>
-				
-				
 			</form>
-  		</div>
-  	
+			
+			<table class="table table-condensed" id="myDivResult">
+			
+			</table>
+
+			</div>
+
+		
 		<div class="col-md-8">
 			<img src="http://192.168.1.12:9000/?action=stream" />
 		</div>
