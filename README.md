@@ -9,7 +9,7 @@ Hardware
 - <a href="http://robosavvy.com/store/product_info.php/products_id/1573">Dagu - 4 Channel DC Motor Controller with Encoder Support</a>
 - <a href="http://www.pololu.com/product/1547">Expansion Plate</a>
 - <a href="http://www.element14.com/community/community/raspberry-pi">RaspBerry PI Model B</a>
-- <a href="http://tecnicume.blogspot.it/2013/03/raspberry-pi-configurare-netgear-150n.html">USB - WiFI - NetGear 150N</a> 
+- <a href="https://www.modmypi.com/w311u-high-gain-long-range-wifi-dongle">WiFi Dongle - Tenda W311U+ High Gain 3.5dB</a> 
 - <a href="http://www.ebay.it/itm/Neu-Camera-Module-Board-5MP-Webcam-Video-1080p-720p-fur-Raspberry-Pi-/380746393772?pt=DE_Computer_Sonstige&hash=item58a640e8ac">RaspiCam</a>
 - <a href="http://www.4tronix.co.uk/arduino/Pan-Tilt-Micro.php">Pan Tilt Cam</a>
 - <a href="http://store.arduino.cc/index.php?main_page=product_info&cPath=11_12&products_id=195">Arduino UNO R3</a>
@@ -25,8 +25,9 @@ App Configuration
 
 SW Configuration
 --------------
-
+- <a href="https://www.modmypi.com/blog/how-to-set-up-the-ralink-rt5370-wifi-dongle-on-raspian">WIFI configuration</a>
 - <a href="http://daringfireball.net/projects/markdown/basics">Node.js</a>
+- <a href="http://www.raspberrypi.org/camera">Raspi Camera</a>
 - <a href="http://www.miguelmota.com/blog/raspberry-pi-camera-board-video-streaming/">RaspiCam Stream</a>
 
 TO DO
@@ -36,7 +37,11 @@ HW Configuration
 
 Arduino
 - Channel 13 - Tilt Pan Left-Right
-- Channle 12 - Tilt Pan Upper-Down
+- Channel 12 - Tilt Pan Upper-Down
+
+Expansion Plate
+- Cut expansion plate with two holes under the engine controller to pass the 4 motor connectors
+TO DO ADD IMAGE
 
 TO DO
 
@@ -71,9 +76,9 @@ Video
 
 <a href="https://www.youtube.com/watch?v=3kZttU3sqc0">First Test</a>
 
-
 TO DO
 --------------
-- Raspicam Tilt panne hardware and software config
-- Extress and nodejs integration express.io
+- Raspicam Tilt pannel hardware and software config
+- Extressjs and nodejs integration express.io
 - test on mobile phone
+- change raspberry to hotspot wifi.
