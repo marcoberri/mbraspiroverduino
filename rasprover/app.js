@@ -36,6 +36,8 @@ app.post('/move/stop', routesMove.stop);
 app.post('/cam/reset', routesCam.reset);
 app.post('/cam/left', routesCam.left);
 app.post('/cam/right', routesCam.right);
+app.post('/cam/up', routesCam.up);
+app.post('/cam/down', routesCam.down);
 
 app.use(function(err, req, res, next) {
 	logger.error(err.stack);

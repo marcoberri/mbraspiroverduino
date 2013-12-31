@@ -44,6 +44,31 @@ exports.right = function(req, res) {
 
 };
 
+
+exports.up = function(req, res) {
+   	logger.info("cam up");
+	sp.write('a', function(err, results) {
+		if(err){
+			console.log('err write ' + err);
+		}  
+		res.jsonp({ result: true, data: results });
+
+	});
+};
+
+exports.down = function(req, res) {
+   	logger.info("cam down");
+	sp.write('q', function(err, results) {
+		if(err){
+			console.log('err write ' + err);
+		}  
+		res.jsonp({ result: true, data: results });
+
+	});
+
+};
+
+
 exports.reset = function(req, res) {
    	logger.info("cam reset");
 	sp.write('u', function(err, results) {

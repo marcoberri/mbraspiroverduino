@@ -14,9 +14,12 @@ static int RIGHT_REAR_PWD = 8;
 static int RIGHT_REAR_DIR = 9;
 
 static int CAM_LR = 13;
+static int CAM_UD = 12;
 
 static int camLR = 90;
-Servo servoLR;
+static int camUD = 90;
+
+Servo servoLR,servoUD;
 
 void setup()
 {
@@ -34,6 +37,9 @@ void setup()
 
   pinMode(CAM_LR,OUTPUT);
   servoLR.attach(CAM_LR);
+
+  pinMode(CAM_UD,OUTPUT);
+  servoUD.attach(CAM_UD);
 
 
   Serial.println("SETUP COMPLETE");
@@ -246,10 +252,10 @@ void help(){
   h += "[S] - Stop";
   h += "[T] - Cam left";
   h += "[Y] - Cam right";
+  h += "[Q] - Cam up";
+  h += "[A] - Cam down";
   h += "[U] - Cam reset";
   h += "[H] - Help";
-
-
   sendMsg(h, true, "info");
 
 }
@@ -262,6 +268,16 @@ void loop(){
 
   if(camLR <= 0){
     camLR = 0;
+  }
+
+
+//Limit of pan tilt
+  if(camUD >= 160){
+    camUD = 160;
+  }
+
+  if(camUD <= 10){
+    camUD = 10;
   }
 
   if (Serial.available() > 0) {
@@ -277,22 +293,34 @@ void loop(){
 
     case 'U' :
       sendMsg("Call Cam Reset", true, "debug");
-      camLR = 90;
-      servoLR.write(v);
+      camUD = camLR = 90;
+      servoLR.write(camLR);
+      servoUD.write(camUD);
       break;
 
     case 'T' :
-      sendMsg("Call Cam Left", true, "debug");
+      sendMsg("Call Cam Left " + (String)camLR, true, "debug");
       camLR = camLR +10;
       servoLR.write(camLR);
       break;
 
     case 'Y' :
-      sendMsg("Call Cam Right", true, "debug");
+      sendMsg("Call Cam Right " + (String)camLR, true, "debug");
       camLR = camLR - 10;
       servoLR.write(camLR);
       break;
 
+    case 'A' :
+      sendMsg("Call Cam Up " + (String)camUD, true, "debug");
+      camUD = camUD -10;
+      servoUD.write(camUD);
+      break;
+
+    case 'Q' :
+      sendMsg("Call Cam Down " + (String)camUD, true, "debug");
+      camUD = camUD + 10;
+      servoUD.write(camUD);
+      break;
     case 'C' :
       sendMsg("Call Check", true, "debug");
       check();
@@ -325,6 +353,7 @@ void loop(){
 
   }
 }
+
 
 
 
