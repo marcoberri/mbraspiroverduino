@@ -58,7 +58,7 @@ Images
 --------------
 
 
-<img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/browser_move_cam.JPG"/>
+<img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/browser_move_cam.jpg"/>
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/IMAG2273.jpg"/>
 
