@@ -245,17 +245,17 @@ void sendMsg(String message, boolean r, String type){
 void help(){
 
 
-  String h = "[F] - Forward";
-  h += "[L] - Left";
-  h += "[R] - Right";
-  h += "[B] - Back";
-  h += "[S] - Stop";
-  h += "[T] - Cam left";
-  h += "[Y] - Cam right";
-  h += "[Q] - Cam up";
-  h += "[A] - Cam down";
-  h += "[U] - Cam reset";
-  h += "[H] - Help";
+  String h = "[F] Forward -";
+  h += "[L] Left -";
+  h += "[R] Right -";
+  h += "[B] Back -";
+  h += "[S] Stop -";
+  h += "[T] Cam left -";
+  h += "[Y] Cam right -";
+  h += "[Q] Cam down -";
+  h += "[A] Cam up -";
+  h += "[U] Cam reset -";
+  h += "[H] Help";
   sendMsg(h, true, "info");
 
 }
