@@ -37,19 +37,30 @@ HW Configuration
 
 Arduino
 
-- Pin 2 - CHANNEL 1 PWD PIN
-- Pin 3 - CHANNEL 1 DIR PIN
-- Pin 4 - CHANNEL 3 PWD PIN
-- Pin 5 - CHANNEL 3 DIR PIN
-- Pin 6 - CHANNEL 2 PWD PIN
-- Pin 7 - CHANNEL 2 DIR PIN
-- Pin 8 - CHANNEL 4 PWD PIN
-- Pin 9 - CHANNEL 4 DIR PIN
-- Pin 13 - Tilt Pan Left-Right
-- Pin 12 - Tilt Pan Upper-Down
+- LEFT_FRONT
+Pin 3 - CHANNEL 1 PWD PIN - analogwrite modulation
+Pin 2 - CHANNEL 1 DIR PIN
+
+- RIGHT_FRONT
+Pin 5 - CHANNEL 3 PWD PIN - analogwrite modulation
+Pin 4 - CHANNEL 3 DIR PIN
+
+- LEFT_REAR
+Pin 6 - CHANNEL 2 PWD PIN - analogwrite modulation
+Pin 7 - CHANNEL 2 DIR PIN
+
+- RIGHT_REAR
+Pin 9 - CHANNEL 4 PWD PIN - analogwrite modulation
+Pin 8 - CHANNEL 4 DIR PIN
+
+- Cam Tilt
+Pin 13 - Left-Right
+Pin 12 - Upper-Down
+
 
 Expansion Plate
 - Cut expansion plate with two holes under the engine controller to pass the 4 motor connectors
+
 TO DO ADD IMAGE
 
 TO DO
