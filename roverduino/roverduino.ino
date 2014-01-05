@@ -1,17 +1,17 @@
 #include <Servo.h>
 #include <ctype.h> 
 
-static int LEFT_FRONT_PWD = 2;
-static int LEFT_FRONT_DIR = 3;
+static int LEFT_FRONT_PWD = 3; //support analogwrite modulation
+static int LEFT_FRONT_DIR = 2;
 
-static int RIGHT_FRONT_PWD = 4;
-static int RIGHT_FRONT_DIR = 5;
+static int RIGHT_FRONT_PWD = 5; //support analogwrite modulation
+static int RIGHT_FRONT_DIR = 4;
 
-static int LEFT_REAR_PWD = 6;
+static int LEFT_REAR_PWD = 6; //support analogwrite modulation
 static int LEFT_REAR_DIR = 7;
 
-static int RIGHT_REAR_PWD = 8;
-static int RIGHT_REAR_DIR = 9;
+static int RIGHT_REAR_PWD = 9; //support analogwrite modulation
+static int RIGHT_REAR_DIR = 8;
 
 static int CAM_LR = 13;
 static int CAM_UD = 12;
@@ -21,17 +21,22 @@ static int camUD = 90;
 
 Servo servoLR,servoUD;
 
+static int velocity = 100;
+
 void setup()
 {
 
   Serial.begin(9600);  
+  
   pinMode(LEFT_FRONT_PWD, OUTPUT);
   pinMode(LEFT_FRONT_DIR, OUTPUT);
+  
   pinMode(RIGHT_FRONT_PWD, OUTPUT);
   pinMode(RIGHT_FRONT_DIR, OUTPUT);
 
   pinMode(LEFT_REAR_PWD, OUTPUT);
   pinMode(LEFT_REAR_DIR, OUTPUT);
+  
   pinMode(RIGHT_REAR_PWD, OUTPUT);
   pinMode(RIGHT_REAR_DIR, OUTPUT);
 
@@ -52,18 +57,18 @@ void check(){
 
   //check LEFT_FRONT
   Serial.println("start check LEFT_FRONT");
-  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  analogWrite(LEFT_FRONT_PWD, velocity);  
   digitalWrite(LEFT_FRONT_DIR, LOW);   
   delay(500);                  
-  digitalWrite(LEFT_FRONT_PWD, LOW);  
+  analogWrite(LEFT_FRONT_PWD, LOW);  
   digitalWrite(LEFT_FRONT_DIR, LOW);   
   delay(500);                  
 
 
-  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  analogWrite(LEFT_FRONT_PWD, velocity);  
   digitalWrite(LEFT_FRONT_DIR, HIGH);   
   delay(500);                  
-  digitalWrite(LEFT_FRONT_PWD, LOW);  
+  analogWrite(LEFT_FRONT_PWD, LOW);  
   digitalWrite(LEFT_FRONT_DIR, LOW);   
   delay(500);                  
 
@@ -72,58 +77,59 @@ void check(){
 
   //check RIGHT_FRONT_PWD
   Serial.println("start check RIGHT_FRONT");
-  digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  analogWrite(RIGHT_FRONT_PWD, velocity);  
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
   delay(500);                  
-  digitalWrite(RIGHT_FRONT_PWD, LOW);  
+  analogWrite(RIGHT_FRONT_PWD, LOW);  
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
   delay(500);                  
 
 
-  digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  analogWrite(RIGHT_FRONT_PWD, velocity);  
   digitalWrite(RIGHT_FRONT_DIR, HIGH);   
   delay(500);                  
-  digitalWrite(RIGHT_FRONT_PWD, LOW);  
+  analogWrite(RIGHT_FRONT_PWD, LOW);  
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
   delay(500);                  
-
-
-
-  //check LEFT_REAR
-  Serial.println("start check LEFT_REAR");
-  digitalWrite(LEFT_REAR_PWD, HIGH);  
-  digitalWrite(LEFT_REAR_DIR, LOW);   
-  delay(500);                  
-  digitalWrite(LEFT_REAR_PWD, LOW);  
-  digitalWrite(LEFT_REAR_DIR, LOW);   
-  delay(500);                  
-
-
-  digitalWrite(LEFT_REAR_PWD, HIGH);  
-  digitalWrite(LEFT_REAR_DIR, HIGH);   
-  delay(500);                  
-  digitalWrite(LEFT_REAR_PWD, LOW);  
-  digitalWrite(LEFT_REAR_DIR, LOW);   
-  delay(500);                  
-
 
 
   //check RIGHT_REAR
   Serial.println("start check RIGHT_REAR");
-  digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);  
   digitalWrite(RIGHT_REAR_DIR, LOW);   
   delay(500);                  
-  digitalWrite(RIGHT_REAR_PWD, LOW);  
+  analogWrite(RIGHT_REAR_PWD, LOW);  
   digitalWrite(RIGHT_REAR_DIR, LOW);   
   delay(500);                  
 
 
-  digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);  
   digitalWrite(RIGHT_REAR_DIR, HIGH);   
   delay(500);                  
-  digitalWrite(RIGHT_REAR_PWD, LOW);  
+  analogWrite(RIGHT_REAR_PWD, LOW);  
   digitalWrite(RIGHT_REAR_DIR, LOW);   
   delay(500);                  
+
+
+  //check LEFT_REAR
+  Serial.println("start check LEFT_REAR");
+  analogWrite(LEFT_REAR_PWD, velocity);  
+  digitalWrite(LEFT_REAR_DIR, LOW);   
+  delay(500);                  
+  analogWrite(LEFT_REAR_PWD, LOW);  
+  digitalWrite(LEFT_REAR_DIR, LOW);   
+  delay(500);                  
+
+
+  analogWrite(LEFT_REAR_PWD, velocity);  
+  digitalWrite(LEFT_REAR_DIR, HIGH);   
+  delay(500);                  
+  analogWrite(LEFT_REAR_PWD, LOW);  
+  digitalWrite(LEFT_REAR_DIR, LOW);   
+  delay(500);                  
+
+
+
 
 }
 
@@ -321,10 +327,12 @@ void loop(){
       camUD = camUD + 10;
       servoUD.write(camUD);
       break;
+ 
     case 'C' :
       sendMsg("Call Check", true, "debug");
       check();
       break;
+ 
     case 'F' :    
       sendMsg("Call Forward", true, "debug");
       forward();
@@ -349,7 +357,7 @@ void loop(){
       sendMsg("Call Help", true, "debug");
       help();
       break;
-    }
+  }
 
   }
 }
