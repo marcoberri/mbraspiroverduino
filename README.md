@@ -2,7 +2,7 @@ RaspiRoverDuino
 ============
 Integration Dagu 5 Rover 4x4 with Arduino and Raspberry PI via Node.js
 
-https://www.codeship.io/projects/c98e3610-59a2-0131-2375-221ce794439b/status
+<img src="https://www.codeship.io/projects/c98e3610-59a2-0131-2375-221ce794439b/status"/>
 
 Hardware
 --------------
