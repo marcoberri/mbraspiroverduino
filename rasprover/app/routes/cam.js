@@ -1,7 +1,6 @@
 var config = require('../conf/');
 var logger = require('../data/logger').logger();
 
-
 var SerialPort = require("serialport").SerialPort;
 
 var sp = new SerialPort(config.raspi.port, {
@@ -22,61 +21,41 @@ sp.on('data',function(data) {
 });
 
 exports.left = function(req, res) {
-   	logger.info("cam left");
-	sp.write('t', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
+    spwrite('T',req);
 };
 
 exports.right = function(req, res) {
-   	logger.info("cam right");
-	sp.write('y', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
-
+    spwrite('Y',req);
 };
 
 
 exports.up = function(req, res) {
-   	logger.info("cam up");
-	sp.write('a', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
+    spwrite('A',req);
 };
 
 exports.down = function(req, res) {
-   	logger.info("cam down");
-	sp.write('q', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
-
+    spwrite('Q',req);
 };
 
 
-exports.reset = function(req, res) {
-   	logger.info("cam reset");
-	sp.write('u', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
+exports.reset = function(req) {
+    spwrite('U',req);
 };
+
+
+spwrite = function(letter, req){
+/*	var msg = 'msg';	
+  var err = "errore";
+	req.io.emit('log', {message: msg, error : err});
+*/
+	sp.write(letter, function(err, results) {
+		if(err){
+			logger.error('err write ' + err);
+		}  
+	
+		req.io.emit('log', {message: results, error : err});
+	});
+
+}
+
 

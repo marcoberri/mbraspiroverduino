@@ -21,58 +21,38 @@ sp.on('data',function(data) {
 	logger.info('Data: '+ data)
 });
 
-exports.left = function(req, res) {
-   	logger.info("left");
-	sp.write('l', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
+exports.left = function(req) {
+	spwrite('L', req);
 };
 
-exports.right = function(req, res) {
-   	logger.info("right");
-	sp.write('r', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
 
-	});
-
+exports.right = function(req) {
+	spwrite('R', req);
 };
 
-exports.forward = function(req, res) {
-   	logger.info("forward");
-	sp.write('f', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
+exports.forward = function(req) {
+	spwrite('F', req);
 };
 
-exports.back = function(req, res) {
-   	logger.info("back");
-	sp.write('b', function(err, results) {
-		if(err){
-			console.log('err write ' + err);
-		}  
-		res.jsonp({ result: true, data: results });
-
-	});
+exports.back = function(req) {
+	spwrite('B', req);
 };
 
-exports.stop = function(req, res) {
-   	logger.info("stop");
-	sp.write('s', function(err, results) {
+exports.stop = function(req) {
+	spwrite('S', req);
+};
+
+spwrite = function(letter, req){
+/*	var msg = 'msg';	
+  var err = "errore";
+	req.io.emit('log', {message: msg, error : err});
+*/
+	sp.write(letter, function(err, results) {
 		if(err){
-			console.log('err write ' + err);
+			logger.error('err write ' + err);
 		}  
-		res.jsonp({ result: true, data: results });
+	
+		req.io.emit('log', {message: results, error : err});
 	});
 
-};
+}

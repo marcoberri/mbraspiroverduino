@@ -21,7 +21,8 @@ Hardware
 
 App Configuration
 --------------
-
+- Node.js
+- Express.io
 
 SW Configuration
 --------------
@@ -99,6 +100,5 @@ Video
 TO DO
 --------------
 - Raspicam Tilt pannel hardware and software config
-- Extressjs and nodejs integration express.io
 - test on mobile phone
 - change raspberry to hotspot wifi.

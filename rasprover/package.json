@@ -6,7 +6,9 @@
   "dependencies": {
     
 	"express": "latest",
-    "express-minify":"latest",
+  "express-minify":"latest",
+	"express.io": "latest",
+  "socket.io" : "latest",
 	"serialport":"latest",
 	"ejs":"latest",
 	"winston":"latest"		

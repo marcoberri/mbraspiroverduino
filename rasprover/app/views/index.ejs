@@ -17,32 +17,25 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-<script>
 
-	function addLog(msg){
-		$("#myDivResult").append("<tr><td>" + new Date().toUTCString() + "</td><td>" + JSON.stringify(msg) + "</td></tr>");
-	}
-	
-	
-	function send(op,url){
-		$.ajax({
-		  type: "POST",
-		  url: url + op,
-		  data: { }
-		})
-		  .done(function( msg ) {
-			addLog(msg);
-		  });
-	
-	}
-	
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+	var socket = io.connect('http://localhost:3000');
+
+	socket.on('log', function(data) {
+		  alert(data.message);
+			alert(data.error);
+	})  
+
+
 	function sendCamData(op){
-		return send(op,"http://192.168.1.12:3000/cam/");
+		socket.emit('/cam/' +op);
 	}
 
 
 	function sendData(op){
-		return send(op,"http://192.168.1.12:3000/move/");
+    socket.emit('/move/' + op);
 	}
 
 </script>
