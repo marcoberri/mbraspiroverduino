@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Move Raver with Dagu 5 with RaspberryPi and Arduino">
+    <meta name="description" content="Rover with Dagu 5 with RaspberryPi and Arduino">
     <meta name="author" content="Marco Berri">
      <title>RaspiRoverDuino</title>
 
@@ -24,8 +24,22 @@
 	var socket = io.connect('http://localhost:3000');
 
 	socket.on('log', function(data) {
-		  alert(data.message);
-			alert(data.error);
+
+	  var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth() + 1; //Months are zero based
+    var curr_year = d.getFullYear();
+    var curr_hours = d.getHours();
+		var curr_sec = d.getSeconds();
+		var curr_min = d.getMinutes();
+
+
+		if(data.error && data.error != ""){
+			$('#myTable tr:first').after('<tr class="danger"><td><small>'+data.type+'</small></td><td><small>'+curr_year+'-' + curr_month + '-' + curr_date + ' ' + curr_hours + ':' + curr_min + ':' + curr_sec + '</small></td><td><small>'+data.calling+'</small></td><td><small>'+data.message+'</small></td><td><small>'+data.error+'</small></td></tr>');
+		}else{
+			$('#myTable tr:first').after('<tr class="success"><td><small>'+data.type+'</small></td><td><small>'+curr_year+'-' + curr_month + '-' + curr_date + ' ' + curr_hours + ':' + curr_min + ':' + curr_sec + '</small></td><td><small>'+data.calling+'</small></td><td><small>'+data.message+'</small></td><td><small>-</small></td></tr>');
+		}
+
 	})  
 
 
@@ -89,10 +103,16 @@
 				</table>
 
 			</form>
-			
-			<table class="table table-condensed" id="myDivResult">
-			
-			</table>
+
+				<div class="table-responsive">
+					<table class="table table-condensed table-bordered" id="myTable">
+					<thead>
+						<tr><td>Type</td><td>Date</td><td>Calling</td><td>Message</td><td>Error</td></tr>
+					</thead>
+					<tbody>
+					</tbody>
+					</table>
+				</div>
 
 			</div>
 
