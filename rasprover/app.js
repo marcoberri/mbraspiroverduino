@@ -72,6 +72,7 @@ app.io.route('/cam/down', routesCam.down);
 
 app.io.sockets.on('connection', function (socket) {
     console.log('A socket connected!');
+			socket.emit('log', {message: "A socket connected!", calling: "-", type: 'conn'});
 });
 
 app.listen(app.get('port'),function() {

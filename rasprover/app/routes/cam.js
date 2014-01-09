@@ -44,18 +44,18 @@ exports.reset = function(req) {
 
 
 spwrite = function(letter, req){
-/*	var msg = 'msg';	
+	var msg = 'msg';	
   var err = "errore";
-	req.io.emit('log', {message: msg, error : err});
-*/
+	req.io.emit('log', {message: msg, error : err, calling: letter,type: 'hw'});
+/*
 	sp.write(letter, function(err, results) {
 		if(err){
 			logger.error('err write ' + err);
 		}  
 	
-		req.io.emit('log', {message: results, error : err});
+		req.io.emit('log', {message: results, error : err,calling: letter,type: 'hw'});
 	});
-
+*/
 }
 
 
