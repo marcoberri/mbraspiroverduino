@@ -32,6 +32,7 @@ SW Configuration
 - <a href="http://daringfireball.net/projects/markdown/basics">Node.js</a>
 - <a href="http://www.raspberrypi.org/camera">Raspi Camera</a>
 - <a href="http://www.miguelmota.com/blog/raspberry-pi-camera-board-video-streaming/">RaspiCam Stream</a>
+- <a href="https://github.com/jacksonliam/mjpg-streamer">Plugin Raspi Camera very fast stream!!</a>
 
 TO DO
 
