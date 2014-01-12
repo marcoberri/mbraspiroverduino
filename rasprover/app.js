@@ -23,7 +23,6 @@ app.use(express.methodOverride());
 
 
 app.use(app.router);
-app.use(require('express-minify')());
 app.use(express.static(__dirname + '/public'));
 app.use(express.compress());
 
