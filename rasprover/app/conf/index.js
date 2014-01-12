@@ -5,9 +5,14 @@ var config = {};
 /**********************/
 config.web = {};
 
+
 //porta della app
 config.web.port = 3000;
+//ip app per socket
 config.web.host = 'http://192.168.1.12:3000';
+//ip stream server
+config.web.cam = 'http://192.168.1.12:8080';
+
 
 /*******************************/
 /* CONFIGURAZIONI RASPIARDUINO */
@@ -15,6 +20,9 @@ config.web.host = 'http://192.168.1.12:3000';
 
 config.raspi = {};
 config.raspi.port = '/dev/ttyACM0';
+
+//se true non vengono fatte le chiamate ad arduino
+config.raspi.test = true;
 
 
 /**********************/
@@ -28,8 +36,5 @@ config.log.path = '/opt/logs/rover.log';
 //livello di loggin info/debug/error 
 config.log.level = 'debug';
 config.log.size = 5120000;
-
-
-
 
 module.exports = config;

@@ -6,6 +6,7 @@ var logger = require('./app/data/logger').logger();
 var routesHome = require('./app/routes/');
 var routesMove = require('./app/routes/move');
 var routesCam = require('./app/routes/cam');
+var routesSystem = require('./app/routes/system');
 
 var app = express();
 
@@ -59,12 +60,16 @@ app.io.route('/move/right', routesMove.right);
 app.io.route('/move/back', routesMove.back);
 app.io.route('/move/forward', routesMove.forward);
 app.io.route('/move/stop', routesMove.stop);
+
 //CAM
 app.io.route('/cam/reset', routesCam.reset);
 app.io.route('/cam/left', routesCam.left);
 app.io.route('/cam/right', routesCam.right);
 app.io.route('/cam/up', routesCam.up);
 app.io.route('/cam/down', routesCam.down);
+
+//System
+app.io.route('/system/check',routesSystem.check);
 
 
 // Setup the ready route, and emit talk event.

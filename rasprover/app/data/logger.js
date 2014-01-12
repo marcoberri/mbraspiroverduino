@@ -10,7 +10,6 @@ exports.logger = function() {
 				new (winston.transports.File)({
 					filename : config.log.path,
 					level: config.log.level
-					//,maxsize : config.log.size
 				}) ]
 	});
 	

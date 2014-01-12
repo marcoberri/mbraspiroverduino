@@ -27,16 +27,16 @@ void setup()
 {
 
   Serial.begin(9600);  
-  
+
   pinMode(LEFT_FRONT_PWD, OUTPUT);
   pinMode(LEFT_FRONT_DIR, OUTPUT);
-  
+
   pinMode(RIGHT_FRONT_PWD, OUTPUT);
   pinMode(RIGHT_FRONT_DIR, OUTPUT);
 
   pinMode(LEFT_REAR_PWD, OUTPUT);
   pinMode(LEFT_REAR_DIR, OUTPUT);
-  
+
   pinMode(RIGHT_REAR_PWD, OUTPUT);
   pinMode(RIGHT_REAR_DIR, OUTPUT);
 
@@ -53,7 +53,6 @@ void setup()
 
 
 void check(){
-
 
   //check LEFT_FRONT
   Serial.println("start check LEFT_FRONT");
@@ -247,10 +246,34 @@ void sendMsg(String message, boolean r, String type){
   Serial.println("{type:" + type + ",result:" + (String)r + ", message:'" +message+"'}");
 }
 
+int limitCamLR(int camLR){
+
+  if(camLR >= 180){
+    camLR = 180;
+  } 
+  else if(camLR <= 0){
+    camLR = 0;
+  }
+
+  return camLR;
+
+}
+
+int limitCamUD(int camUD){
+
+
+  if(camUD >= 160){
+    camUD = 160;
+  }
+  else if(camUD <= 10){
+    camUD = 10;
+  }
+
+  return camUD;
+}
+
 
 void help(){
-
-
   String h = "[F] Forward -";
   h += "[L] Left -";
   h += "[R] Right -";
@@ -266,101 +289,111 @@ void help(){
 
 }
 
+int camLeft(int camLR){
+  sendMsg("Call Cam Left " + (String)camLR, true, "debug");
+  camLR = camLR +10;
+  servoLR.write(camLR);
+  return camLR;
+}
+
+int camRight(int camLR){
+  sendMsg("Call Cam Right " + (String)camLR, true, "debug");
+  camLR = camLR - 10;
+  servoLR.write(camLR);
+  return camLR;
+}
+
+int camUp(int camUD){
+  sendMsg("Call Cam Up " + (String)camUD, true, "debug");
+  camUD = camUD -10;
+  servoUD.write(camUD);
+  return camUD;
+}
+
+int camDown(int camUD){
+  sendMsg("Call Cam Down " + (String)camUD, true, "debug");
+  camUD = camUD + 10;
+  servoUD.write(camUD);
+  return  camUD;
+}
+
 void loop(){
 
-  if(camLR >= 180){
-    camLR = 180;
-  }
-
-  if(camLR <= 0){
-    camLR = 0;
-  }
-
-
-//Limit of pan tilt
-  if(camUD >= 160){
-    camUD = 160;
-  }
-
-  if(camUD <= 10){
-    camUD = 10;
-  }
+  camUD = limitCamUD(camUD);
+  camLR = limitCamLR(camLR);
 
   if (Serial.available() > 0) {
-
-
     char ch = toupper(Serial.read());
-
-    Serial.println(ch);
-
+    //Serial.println(ch);
+    
     switch(ch){
-
-
-
-    case 'U' :
-      sendMsg("Call Cam Reset", true, "debug");
-      camUD = camLR = 90;
-      servoLR.write(camLR);
-      servoUD.write(camUD);
+    
+      case 'U' :
+      camLR = camLeft(80);
+      delay(50);                
+      camUD = camUp(80);
+      delay(50);                
       break;
 
     case 'T' :
-      sendMsg("Call Cam Left " + (String)camLR, true, "debug");
-      camLR = camLR +10;
-      servoLR.write(camLR);
+      camLR = camLeft(camLR);
+      delay(50);                
       break;
 
     case 'Y' :
-      sendMsg("Call Cam Right " + (String)camLR, true, "debug");
-      camLR = camLR - 10;
-      servoLR.write(camLR);
+      camLR = camRight(camLR);
+      delay(50);
       break;
 
     case 'A' :
-      sendMsg("Call Cam Up " + (String)camUD, true, "debug");
-      camUD = camUD -10;
-      servoUD.write(camUD);
+      camUD = camUp(camUD);
+      delay(50);
       break;
 
     case 'Q' :
-      sendMsg("Call Cam Down " + (String)camUD, true, "debug");
-      camUD = camUD + 10;
-      servoUD.write(camUD);
+      camUD = camDown(camUD);
+      delay(50);
       break;
- 
+
     case 'C' :
       sendMsg("Call Check", true, "debug");
       check();
       break;
- 
+
     case 'F' :    
       sendMsg("Call Forward", true, "debug");
       forward();
       break;
+    
     case 'S' :    
       sendMsg("Call Stop", true, "debug");
       stop();
       break;
+    
     case 'B' :    
       sendMsg("Call Back", true, "debug");
       back();
       break;
+    
     case 'L' :    
       sendMsg("Call Left", true, "debug");
       left();
       break;
+    
     case 'R' :    
       sendMsg("Call Right", true, "debug");
       right();
       break;
+    
     case 'H' :    
       sendMsg("Call Help", true, "debug");
       help();
       break;
-  }
-
+    }
   }
 }
+
+
 
 
 
