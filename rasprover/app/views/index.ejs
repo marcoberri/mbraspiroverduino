@@ -18,7 +18,7 @@
     <![endif]-->
 
 <style type="text/css">
-.button_dtd { height:50px;width:100px;}
+ button_dtd { height:50px;width:100px;}
 </style
 
 <script src="/socket.io/socket.io.js"></script>
@@ -94,7 +94,7 @@
 	
 				<h3>Move</h3>
 				<table class="table table-condensed">
-					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendData('forward');" style="button_std" type="button" name="FORWARD" value="FORWARD"/></td><td>&nbsp;</td></tr>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success button_std" onClick="sendData('forward');"  type="button" name="FORWARD" value="FORWARD"/></td><td>&nbsp;</td></tr>
 					<tr><td><input class="btn btn-success" onClick="sendData('left');" style="button_std" type="button" name="LEFT" value="LEFT"/></td>
 					<td><input class="btn btn-danger" onClick="sendData('stop');" style="button_std" type="button" name="STOP" value="STOP"/></td>
 					<td><input class="btn btn-success" onClick="sendData('right');" style="button_std" type="button" name="RIGHT" value="RIGHT"/></td></tr>
