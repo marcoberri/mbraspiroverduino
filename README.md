@@ -25,6 +25,7 @@ App Configuration
 --------------
 - Node.js
 - Express.io
+- configuration file on /app/conf/index.js
 
 SW Configuration
 --------------
@@ -72,7 +73,6 @@ TO DO
 Images
 --------------
 
-
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/browser_move_cam.jpg"/>
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/IMAG2273.jpg"/>
@@ -99,6 +99,11 @@ Video
 --------------
 
 <a href="https://www.youtube.com/watch?v=3kZttU3sqc0">First Test</a>
+
+NOTE
+--------------
+- the app on nodejs not support socket.io in clutering mode (see server.js in root folder)
+- for streaming see this article <a href="https://github.com/jacksonliam/mjpg-streamer">Plugin Raspi Camera very fast stream!!</a>
 
 TO DO
 --------------

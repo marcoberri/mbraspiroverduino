@@ -1,18 +1,26 @@
 {
   "name": "Rover",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
-  "scripts": {"start": "node server.js"},
+  "scripts": {"start": "node app.js"},
+	"author":{ 
+		"name" : "Marco Berri",
+	 	"email" : "marcoberri@gmail.com",
+	  "url" : "http://tecnicume.blogspot.it/"
+	},
+	"bugs":{ 
+		"url" : "https://github.com/marcoberri/mbraspiroverduino/issues",
+ 		"email" : "marcoberri@gmail.com"
+	},
   "dependencies": {
-    
-	"express": "latest",
-	"express.io": "latest",
-  "socket.io" : "latest",
-	"serialport":"latest",
-	"ejs":"latest",
-	"winston":"latest"		
+		"express": "latest",
+		"express.io": "latest",
+		 "socket.io" : "latest",
+		"serialport":"latest",
+		"ejs":"latest",
+		"winston":"latest"		
   },
-  
+  "license": "MIT",
   "analyze": true,
   "engines": {
     "node": ">=0.10"
