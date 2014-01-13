@@ -17,10 +17,6 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-<style type="text/css">
- button_dtd { height:50px;width:100px;}
-</style
-
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
@@ -56,7 +52,11 @@
 
 	function sendSystemData(op){
 		if(op == 'check'){
-			socket.emit('/system/' + op);
+			bootbox.confirm("remove the tracks before proceeding!", function(result) {
+				if(result == true || result == 'true'){
+					socket.emit('/system/' + op);
+				}
+			});
 		}
 	}
 
@@ -94,25 +94,25 @@
 	
 				<h3>Move</h3>
 				<table class="table table-condensed">
-					<tr><td>&nbsp;</td><td><input class="btn btn-success button_std" onClick="sendData('forward');"  type="button" name="FORWARD" value="FORWARD"/></td><td>&nbsp;</td></tr>
-					<tr><td><input class="btn btn-success" onClick="sendData('left');" style="button_std" type="button" name="LEFT" value="LEFT"/></td>
-					<td><input class="btn btn-danger" onClick="sendData('stop');" style="button_std" type="button" name="STOP" value="STOP"/></td>
-					<td><input class="btn btn-success" onClick="sendData('right');" style="button_std" type="button" name="RIGHT" value="RIGHT"/></td></tr>
-					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendData('back');" style="button_std" type="button" name="BACK" value="BACK"/></td><td>&nbsp;</td></tr>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success  btn-block" onClick="sendData('forward');"  type="button" name="FORWARD" value="FORWARD"/></td><td>&nbsp;</td></tr>
+					<tr><td><input class="btn btn-success  btn-block" onClick="sendData('left');" type="button" name="LEFT" value="LEFT"/></td>
+					<td><input class="btn btn-danger  btn-block" onClick="sendData('stop');"  type="button" name="STOP" value="STOP"/></td>
+					<td><input class="btn btn-success  btn-block" onClick="sendData('right');"  type="button" name="RIGHT" value="RIGHT"/></td></tr>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success  btn-block" onClick="sendData('back');"  type="button" name="BACK" value="BACK"/></td><td>&nbsp;</td></tr>
 				</table>
 
 				<h3>Cam</h3>
 				<table class="table table-condensed">
-					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendCamData('up');" style="button_std" type="button" name="UP" value="UP"/></td><td>&nbsp;</td></tr>
-					<tr><td><input class="btn btn-success" onClick="sendCamData('left');" style="button_std" type="button" name="LEFT" value="LEFT"/></td>
-					<td><input class="btn btn-danger" onClick="sendCamData('reset');" style="button_std" type="button" name="RESET" value="RESET"/></td>
-					<td><input class="btn btn-success" onClick="sendCamData('right');" style="button_std" type="button" name="RIGHT" value="RIGHT"/></td></tr>
-					<tr><td>&nbsp;</td><td><input class="btn btn-success" onClick="sendCamData('down');" style="button_std" type="button" name="DOWN" value="DOWN"/></td><td>&nbsp;</td></tr>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success btn-block" onClick="sendCamData('up');" type="button" name="UP" value="UP"/></td><td>&nbsp;</td></tr>
+					<tr><td><input class="btn btn-success btn-block" onClick="sendCamData('left');" type="button" name="LEFT" value="LEFT"/></td>
+					<td><input class="btn btn-danger btn-block" onClick="sendCamData('reset');" type="button" name="RESET" value="RESET"/></td>
+					<td><input class="btn btn-success btn-block" onClick="sendCamData('right');" type="button" name="RIGHT" value="RIGHT"/></td></tr>
+					<tr><td>&nbsp;</td><td><input class="btn btn-success btn-block" onClick="sendCamData('down');" type="button" name="DOWN" value="DOWN"/></td><td>&nbsp;</td></tr>
 				</table>
 
 				<h3>Utility</h3>
 				<table class="table table-condensed">
-					<tr><td><input class="btn btn-success" onClick="sendCamData('check');" style="button_std" type="button" name="CHECK" value="CHECK"/></td><td>&nbsp;</td></tr>
+					<tr><td><input class="btn btn-warning btn-block" onClick="sendSystemData('check');" type="button" name="CHECK" value="System check"/></td><td>&nbsp;</td></tr>
 				</table>
 				
 				
@@ -132,7 +132,7 @@
 
 		
 		<div class="col-md-8">
-			<img src="http://192.168.1.12:9000/?action=stream" />
+			<img src="<%=config.web.cam%>/?action=stream" />
 		</div>
   	</div>
 
@@ -140,5 +140,6 @@
 
     <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+		<script src="/js/bootbox.min.js"></script>
   </body>
 </html>

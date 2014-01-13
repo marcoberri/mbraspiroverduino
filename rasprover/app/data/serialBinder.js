@@ -9,6 +9,7 @@ var sp = new SerialPort(config.raspi.port, {
 
 sp.on("open", function (err) {
 	if(err){
+  	req.io.emit('log', {message: '', error : err, calling: '-',type: 'hw'});
 		logger.error('err open ' + err);
 	}
 });
@@ -19,14 +20,15 @@ sp.on('data',function(data) {
 
 spwrite = function(letter, req){
 
-	if(config.test){
-		var msg = 'testing mode';	
+	if(config.raspi.test){
+   		var msg = 'testing mode';	
   		var err = "errore";
-		req.io.emit('log', {message: msg, error : err, calling: letter,type: 'hw'});
-		return;
+			req.io.emit('log', {message: msg, error : err, calling: letter,type: 'hw'});
+			return;
 	}
 
 	sp.write(letter, function(err, results) {
+
 		if(err){
 			logger.error('err write ' + err);
 		}  
