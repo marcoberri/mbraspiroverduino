@@ -13,13 +13,13 @@
  		"email" : "marcoberri@gmail.com"
 	},
   "dependencies": {
-		"express": "*",
-		"express.io": "*",
-		 "socket.io" : "*",
-		"serialport":"*",
-		"ejs":"*",
-		"winston":"*",
-		"mpu6050":"*"		
+		"express": "latest",
+		"express.io": "latest",
+		 "socket.io" : "latest",
+		"serialport":"latest",
+		"ejs":"latest",
+		"winston":"latest",
+		"mpu6050":"latest"		
   },
   "license": "MIT",
   "analyze": true,

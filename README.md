@@ -19,7 +19,7 @@ Hardware
 - <a href="http://callpod.com/products/fueltank">CallPod - Fueltank UNO for Raspberry PI</a>
 - <a href="http://www.ebay.it/itm/130995862894?ssPageName=STRK:MEWNX:IT&_trksid=p3984.m1497.l2649">Snap Clip 9V Battery</a>
 - <a href="http://www.ebay.it/itm/Arduino-Breadboard-Jumper-Cable-Wires-65-Cable-Pack-/140922066946">Jumper Cable</a>
-
+- MPU5060
 
 App Configuration
 --------------
@@ -62,6 +62,10 @@ Pin 8 - CHANNEL 4 DIR PIN
 Pin 13 - Left-Right
 Pin 12 - Upper-Down
 
+
+Raspberry Pi
+
+<a href="http://blog.bitify.co.uk/2013/11/interfacing-raspberry-pi-and-mpu-6050.html">MPU5060</a>
 
 Expansion Plate
 - Cut expansion plate with two holes under the engine controller to pass the 4 motor connectors
