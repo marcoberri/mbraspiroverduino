@@ -1,39 +1,46 @@
 var config = require('../conf/');
 var logger = require('./logger').logger();
-var SerialPort = require("serialport").SerialPort;
 
-var sp = new SerialPort(config.raspi.port, {
-  	baudRate: 9600,
-  	parser: require("serialport").parsers.readline('\n'),
-});
 
-sp.on("open", function (err) {
-	if(err){
-  	req.io.emit('log', {message: '', error : err, calling: '-',type: 'hw'});
-		logger.error('err open ' + err);
-	}
-});
+logger.info("config.raspi.test  ---> " + config.raspi.test);
 
-sp.on('data',function(data) {
-	logger.info('Data: '+ data)
-});
+if(!config.raspi.test){
+	
+        var SerialPort = require("serialport").SerialPort;
 
-spwrite = function(letter, req){
+        var sp = new SerialPort(config.raspi.port, {
+  	        baudRate: 9600,
+          	parser: require("serialport").parsers.readline('\n'),
+        });
 
-	if(config.raspi.test){
+        sp.on("open", function (err) {
+	        if(err){
+                  	req.io.emit('log', {message: '', error : err, calling: '-',type: 'hw'});
+                  	logger.error('err open ' + err);
+        	}
+        });
+
+        sp.on('data',function(data) {
+	        logger.info('Data: '+ data)
+        });
+
+        spwrite = function(letter, req){
+
+	        sp.write(letter, function(err, results) {
+
+		        if(err){
+			        logger.error('err write ' + err);
+        		}  
+	
+	        	req.io.emit('log', {message: results, error : err,calling: letter,type: 'hw'});
+        	});
+	};
+
+}else{
+        spwrite = function(letter, req){
    		var msg = 'testing mode';	
   		var err = "errore";
-			req.io.emit('log', {message: msg, error : err, calling: letter,type: 'hw'});
-			return;
+		req.io.emit('log', {message: msg, error : err, calling: letter,type: 'hw'});
 	}
-
-	sp.write(letter, function(err, results) {
-
-		if(err){
-			logger.error('err write ' + err);
-		}  
-	
-		req.io.emit('log', {message: results, error : err,calling: letter,type: 'hw'});
-	});
 
 }

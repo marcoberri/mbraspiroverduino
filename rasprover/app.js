@@ -71,8 +71,6 @@ app.io.route('/cam/down', routesCam.down);
 app.io.route('/system/check',routesSystem.check);
 
 
-// Setup the ready route, and emit talk event.
-
 
 app.io.sockets.on('connection', function (socket) {
     console.log('A socket connected!');
