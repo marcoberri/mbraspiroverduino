@@ -19,7 +19,7 @@ Hardware
 - <a href="http://callpod.com/products/fueltank">CallPod - Fueltank UNO for Raspberry PI</a>
 - <a href="http://www.ebay.it/itm/130995862894?ssPageName=STRK:MEWNX:IT&_trksid=p3984.m1497.l2649">Snap Clip 9V Battery</a>
 - <a href="http://www.ebay.it/itm/Arduino-Breadboard-Jumper-Cable-Wires-65-Cable-Pack-/140922066946">Jumper Cable</a>
-- MPU5060
+- MPU6050
 
 App Configuration
 --------------
@@ -34,6 +34,7 @@ SW Configuration
 - <a href="http://www.raspberrypi.org/camera">Raspi Camera</a>
 - <a href="http://www.miguelmota.com/blog/raspberry-pi-camera-board-video-streaming/">RaspiCam Stream</a>
 - <a href="https://github.com/jacksonliam/mjpg-streamer">Plugin Raspi Camera very fast stream!!</a>
+- <a href="http://blog.bitify.co.uk/2013/11/interfacing-raspberry-pi-and-mpu-6050.html">MPU5060</a>
 
 TO DO
 
@@ -63,9 +64,6 @@ Pin 13 - Left-Right
 Pin 12 - Upper-Down
 
 
-Raspberry Pi
-
-<a href="http://blog.bitify.co.uk/2013/11/interfacing-raspberry-pi-and-mpu-6050.html">MPU5060</a>
 
 Expansion Plate
 - Cut expansion plate with two holes under the engine controller to pass the 4 motor connectors
@@ -77,7 +75,7 @@ TO DO
 Images
 --------------
 
-<img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/browser_move_cam.jpg"/>
+<img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/interfacee_2.jpg"/>
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/IMAG2273.jpg"/>
 
@@ -111,6 +109,6 @@ NOTE
 
 TO DO
 --------------
-- Raspicam Tilt pannel hardware and software config
+- configure gyro
 - test on mobile phone
 - change raspberry to hotspot wifi.
