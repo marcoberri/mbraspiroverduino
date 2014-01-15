@@ -44,18 +44,22 @@ HW Configuration
 Arduino
 
 - LEFT_FRONT
+
 Pin 3 - CHANNEL 1 PWD PIN - analogwrite modulation
 Pin 2 - CHANNEL 1 DIR PIN
 
 - RIGHT_FRONT
+
 Pin 5 - CHANNEL 3 PWD PIN - analogwrite modulation
 Pin 4 - CHANNEL 3 DIR PIN
 
 - LEFT_REAR
+
 Pin 6 - CHANNEL 2 PWD PIN - analogwrite modulation
 Pin 7 - CHANNEL 2 DIR PIN
 
 - RIGHT_REAR
+
 Pin 9 - CHANNEL 4 PWD PIN - analogwrite modulation
 Pin 8 - CHANNEL 4 DIR PIN
 
@@ -75,7 +79,7 @@ TO DO
 Images
 --------------
 
-<img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/interfacee_2.jpg"/>
+<img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/interface_2.jpg"/>
 
 <img src="https://raw.github.com/marcoberri/mbraspiroverduino/master/image/IMAG2273.jpg"/>
 
