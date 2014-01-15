@@ -1,8 +1,16 @@
 {
   "name": "Rover",
   "version": "0.0.2",
+  "homepage": "http://tecnicume.blogspot.it",
+  "readmeFilename": "Readme.md",
+  "description": "Rover with Arduino, Raspberry and Dagu 5 Chasis",
   "private": true,
   "scripts": {"start": "node app.js"},
+ "repository": {
+    "type": "git",
+    "url": "git://github.com/marcoberri/mbraspiroverduino"
+  },
+ "readmeFilename": "Readme.md",
 	"author":{ 
 		"name" : "Marco Berri",
 	 	"email" : "marcoberri@gmail.com",
