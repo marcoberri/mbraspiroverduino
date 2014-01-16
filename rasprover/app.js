@@ -3,6 +3,7 @@ var socketio = require("socket.io");
 var http = require('http');
 var express = require('express.io');
 var logger = require('./app/data/logger').logger();
+var mpu6050 = require('./app/data/gyro');
 var routesHome = require('./app/routes/');
 var routesMove = require('./app/routes/move');
 var routesCam = require('./app/routes/cam');
@@ -74,7 +75,9 @@ app.io.route('/system/check',routesSystem.check);
 
 app.io.sockets.on('connection', function (socket) {
     console.log('A socket connected!');
-			socket.emit('log', {message: "A socket connected!", calling: "-", type: 'conn'});
+    socket.emit('log', {message: "A socket connected!", calling: "-", type: 'conn'});
+    console.log("start get gyro on " + config.raspi.mpu6050time);
+    socket.emit('log', {message: "Gyro info", calling: "-", type: 'mp6050'});
 });
 
 app.listen(app.get('port'),function() {
