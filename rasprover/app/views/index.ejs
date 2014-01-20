@@ -39,16 +39,19 @@
 			$('#myTable tr:first').after('<tr class="success"><td><small>'+data.type+'</small></td><td><small>'+curr_year+'-' + curr_month + '-' + curr_date + ' ' + curr_hours + ':' + curr_min + ':' + curr_sec + '</small></td><td><small>'+data.calling+'</small></td><td><small>'+data.message+'</small></td><td><small>-</small></td></tr>');
 		}
 
-	})  
+	});  
 
-
+	socket.on('mpu6050', function(data) {
+		alert(data);
+	};
+	
 	function sendCamData(op){
 		socket.emit('/cam/' +op);
-	}
+	};
 
 	function sendData(op){
 		socket.emit('/move/' + op);
-	}
+	};
 
 	function sendSystemData(op){
 		if(op == 'check'){
@@ -58,7 +61,14 @@
 				}
 			});
 		}
-	}
+	};
+	
+
+	var mpu6050 = setInterval(function(){getMpu6050()},1000);
+
+	function getMpu6050() {
+		socket.emit('/mpu6050/getMotion');
+	};
 
 </script>
 
@@ -140,6 +150,7 @@
 
     <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-		<script src="/js/bootbox.min.js"></script>
+	<script src="/js/bootbox.min.js"></script>
+  
   </body>
 </html>
