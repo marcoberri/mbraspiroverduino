@@ -42,8 +42,16 @@
 	});  
 
 	socket.on('mpu6050', function(data) {
-		alert(data);
-	};
+		var message = data.message;
+		$('#accx').val(message[0]);	
+		$('#accy').val(message[1]);	
+		$('#accz').val(message[2]);	
+
+		$('#motx').val(message[3]);	
+		$('#moty').val(message[4]);	
+		$('#motz').val(message[5]);	
+
+	});
 	
 	function sendCamData(op){
 		socket.emit('/cam/' +op);
@@ -131,8 +139,7 @@
 				<div class="table-responsive">
 					<table class="table table-condensed table-bordered" id="myTable">
 					<thead>
-						<tr><td>Type</td><td>Date</td><td>Calling</td><td>Message</td><td>Error</td></tr>
-					</thead>
+						<tr><td>Type</td><td>Date</td><td>Calling</td><td>Message</td><td>Error</td></tr>					</thead>
 					<tbody>
 					</tbody>
 					</table>
@@ -142,15 +149,61 @@
 
 		
 		<div class="col-md-8">
-			<img src="<%=config.web.cam%>/?action=stream" />
+			<img src="<%=config.web.cam%>/?action=stream" class="img-rounded"/>
+
+				<form id="formMpu6050" class="form-inline" role="form" >
+				<div class="row">
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="accx">Acc x</label>
+					  <input type="text" class="form-control" id="accx" disabled/>					
+					</div>
+				  </div>
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="accy">Acc y</label>
+					  <input type="text" class="form-control" id="accy" disabled/>					
+					</div>
+				 </div>
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="accz">Acc z</label>
+					  <input type="text" class="form-control" id="accz" disabled/>					
+					</div>
+				 </div>
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="motx">Mot x</label>
+					  <input type="text" class="form-control" id="motx" disabled/>					
+					</div>
+
+				 </div>
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="moty">Mot y</label>
+					  <input type="text" class="form-control" id="moty" disabled/>					
+					</div>
+				  </div>	
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="motz">Mot z</label>
+					  <input type="text" class="form-control" id="motz" disabled/>					
+					</div>
+	                         </div>
+				</div>
+
+				</form>
+
 		</div>
+
+
   	</div>
 
     </div><!-- /.container -->
 
     <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-	<script src="/js/bootbox.min.js"></script>
+    <script src="/js/bootbox.min.js"></script>
   
   </body>
 </html>

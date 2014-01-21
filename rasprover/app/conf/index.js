@@ -29,8 +29,6 @@ config.raspi.test = true;
 
 //abilita o meno la ricezione del gyroscopio
 config.raspi.mpu6050 = false;
-//secondi di intervallo per emit delle info del mp6050
-config.raspi.mpu6050time = 2000;
 
 
 /**********************/
