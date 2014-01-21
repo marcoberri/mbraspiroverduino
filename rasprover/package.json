@@ -2,7 +2,7 @@
   "name": "Rover",
   "version": "0.0.2",
   "homepage": "http://tecnicume.blogspot.it",
-  "readmeFilename": "Readme.md",
+  "readmeFilename": "README.md",
   "description": "Rover with Arduino, Raspberry and Dagu 5 Chasis",
   "private": true,
   "scripts": {"start": "node app.js"},
