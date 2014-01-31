@@ -7,12 +7,12 @@ config.web = {};
 
 
 //porta della app
-config.web.port = 3001; //test
-//config.web.port = 3000; //prod
+//config.web.port = 3001; //test
+config.web.port = 3000; //prod
 
 //ip app per socket
-//config.web.host = 'http://192.168.1.12:' + config.web.port; //prod
-config.web.host = 'http://localhost:' + config.web.port; //test
+config.web.host = 'http://192.168.1.12:' + config.web.port; //prod
+//config.web.host = 'http://localhost:' + config.web.port; //test
 
 //ip stream server
 config.web.cam = 'http://192.168.1.12:9000';
@@ -26,10 +26,10 @@ config.raspi = {};
 config.raspi.port = '/dev/ttyACM0';
 
 //se true non vengono fatte le chiamate ad arduino
-config.raspi.test = true;
+config.raspi.test = false;
 
 //abilita o meno la ricezione del gyroscopio
-config.raspi.mpu6050 = false;
+config.raspi.mpu6050 = true;
 
 
 /**********************/
