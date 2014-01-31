@@ -77,8 +77,8 @@ app.io.route('/system/check',routesSystem.check);
 
 
 app.io.sockets.on('connection', function (socket) {
-    console.log('A socket connected!');
-    socket.emit('log', {message: "A socket connected!", calling: "-", type: 'conn'});
+    logger.info('A socket server connected!');
+    socket.emit('log', {message: "A socket server "+ app.get('port')+ " connected ", calling: "-", type: 'conn'});
 });
 
 app.listen(app.get('port'),function() {
