@@ -1,3 +1,9 @@
+/*
+Autor: Marco Berri marcoberri@gmail.com 
+Web Author : http://tecnicume.blogspot.it
+Project: https://github.com/marcoberri/mbraspiroverduino 
+*/
+
 #include <Servo.h>
 #include <ctype.h> 
 
@@ -132,22 +138,31 @@ void check(){
 
 }
 
+void getVelocity(){
+  sendMsg(""+velocity, true, "velocity");
+}
+
 void forward(){
+  sendMsg("Call Forward", true, "debug");
 
   //LEFT_FRONT
-  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  //digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  analogWrite(LEFT_FRONT_PWD, velocity);  
   digitalWrite(LEFT_FRONT_DIR, HIGH);   
 
   //RIGHT_FRONT
-  digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, HIGH);   
 
   //LEFT_REAR
-  digitalWrite(LEFT_REAR_PWD, HIGH);  
+  //digitalWrite(LEFT_REAR_PWD, HIGH);  
+  analogWrite(LEFT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, LOW);   
 
   //RIGHT_REAR
-  digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, LOW);   
 
   delay(50);                  
@@ -155,21 +170,26 @@ void forward(){
 }
 
 void left(){
+  sendMsg("Call Left", true, "debug");
 
   //LEFT_FRONT
-  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  // digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  analogWrite(LEFT_FRONT_PWD, velocity);
   digitalWrite(LEFT_FRONT_DIR, HIGH);   
 
   //RIGHT_FRONT
-  digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
 
   //LEFT_REAR
-  digitalWrite(LEFT_REAR_PWD, HIGH);  
+  //digitalWrite(LEFT_REAR_PWD, HIGH);  
+  analogWrite(LEFT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, LOW);   
 
   //RIGHT_REAR
-  digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, HIGH);   
 
   delay(50);                
@@ -177,21 +197,26 @@ void left(){
 }
 
 void right(){
+  sendMsg("Call Right", true, "debug");
 
   //LEFT_FRONT
-  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  //  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  analogWrite(LEFT_FRONT_PWD, velocity);
   digitalWrite(LEFT_FRONT_DIR, LOW);   
 
   //RIGHT_FRONT
-  digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, HIGH);   
 
   //LEFT_REAR
-  digitalWrite(LEFT_REAR_PWD, HIGH);  
+  // digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, HIGH);   
 
   //RIGHT_REAR
-  digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, LOW);   
 
   delay(50);                  
@@ -199,21 +224,26 @@ void right(){
 }
 
 void back(){
+  sendMsg("Call Back", true, "debug");
 
   //LEFT_FRONT
-  digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  //digitalWrite(LEFT_FRONT_PWD, HIGH);  
+  analogWrite(LEFT_FRONT_PWD, velocity);
   digitalWrite(LEFT_FRONT_DIR, LOW);   
 
   //RIGHT_FRONT
-  digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
+  analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
 
   //LEFT_REAR
-  digitalWrite(LEFT_REAR_PWD, HIGH);  
+  //digitalWrite(LEFT_REAR_PWD, HIGH);  
+  analogWrite(LEFT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, HIGH);   
 
   //RIGHT_REAR
-  digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
+  analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, HIGH);   
 
   delay(50);                    
@@ -221,6 +251,7 @@ void back(){
 }
 
 void stop(){
+  sendMsg("Call Stop", true, "debug");
 
   //LEFT_FRONT
   digitalWrite(LEFT_FRONT_PWD, LOW);  
@@ -279,6 +310,9 @@ void help(){
   h += "[R] Right -";
   h += "[B] Back -";
   h += "[S] Stop -";
+  h += "[+] Acc -";
+  h += "[-] Dec -";
+  h += "[V] Vel Act";
   h += "[T] Cam left -";
   h += "[Y] Cam right -";
   h += "[Q] Cam down -";
@@ -324,11 +358,10 @@ void loop(){
 
   if (Serial.available() > 0) {
     char ch = toupper(Serial.read());
-    //Serial.println(ch);
-    
+
     switch(ch){
-    
-      case 'U' :
+
+    case 'U' :
       camLR = camLeft(80);
       delay(50);                
       camUD = camUp(80);
@@ -350,48 +383,60 @@ void loop(){
       delay(50);
       break;
 
+    case '+' :
+      velocity += 10;
+      break;
+
+    case '-' :
+      if(velocity-10 <=0){
+        velocity = 0;
+      }
+      else{
+        velocity -= 10;
+      }
+      break;
+
+    case 'V' :
+      getVelocity();
+      break;
+
     case 'Q' :
       camUD = camDown(camUD);
       delay(50);
       break;
 
     case 'C' :
-      sendMsg("Call Check", true, "debug");
       check();
       break;
 
     case 'F' :    
-      sendMsg("Call Forward", true, "debug");
       forward();
       break;
-    
+
     case 'S' :    
-      sendMsg("Call Stop", true, "debug");
       stop();
       break;
-    
+
     case 'B' :    
-      sendMsg("Call Back", true, "debug");
       back();
       break;
-    
+
     case 'L' :    
-      sendMsg("Call Left", true, "debug");
       left();
       break;
-    
+
     case 'R' :    
-      sendMsg("Call Right", true, "debug");
       right();
       break;
-    
+
     case 'H' :    
-      sendMsg("Call Help", true, "debug");
       help();
       break;
     }
   }
 }
+
+
 
 
 
