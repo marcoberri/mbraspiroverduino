@@ -16,3 +16,12 @@ exports.back = function(req) {
 exports.stop = function(req) {
 	spwrite('S', req);
 };
+
+exports.acc = function(req) {
+	spwrite('+', req);
+};
+
+exports.dec = function(req) {
+	spwrite('-', req);
+};
+

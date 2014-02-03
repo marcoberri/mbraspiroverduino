@@ -60,6 +60,9 @@ app.io.route('/move/right', routesMove.right);
 app.io.route('/move/back', routesMove.back);
 app.io.route('/move/forward', routesMove.forward);
 app.io.route('/move/stop', routesMove.stop);
+app.io.route('/move/acc', routesMove.acc);
+app.io.route('/move/dec', routesMove.dec);
+
 
 //CAM
 app.io.route('/cam/reset', routesCam.reset);
