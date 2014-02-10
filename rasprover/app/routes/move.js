@@ -1,8 +1,12 @@
 require('../data/serialBinder');
-
+var logger = require('../data/logger').logger();
 
 exports.right = function(req) {
 	spwrite('R', req);
+};
+
+exports.left = function(req) {
+	spwrite('L', req);
 };
 
 exports.forward = function(req) {
@@ -14,6 +18,7 @@ exports.back = function(req) {
 };
 
 exports.stop = function(req) {
+	logger.warn("Call S");
 	spwrite('S', req);
 };
 
