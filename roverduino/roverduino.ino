@@ -77,9 +77,6 @@ void check(){
   digitalWrite(LEFT_FRONT_DIR, LOW);   
   delay(500);                  
 
-
-
-
   //check RIGHT_FRONT_PWD
   Serial.println("start check RIGHT_FRONT");
   analogWrite(RIGHT_FRONT_PWD, velocity);  
@@ -133,9 +130,6 @@ void check(){
   digitalWrite(LEFT_REAR_DIR, LOW);   
   delay(500);                  
 
-
-
-
 }
 
 void getVelocity(){
@@ -146,22 +140,18 @@ void forward(){
   sendMsg("Call Forward", true, "debug");
 
   //LEFT_FRONT
-  //digitalWrite(LEFT_FRONT_PWD, HIGH);  
   analogWrite(LEFT_FRONT_PWD, velocity);  
   digitalWrite(LEFT_FRONT_DIR, HIGH);   
 
   //RIGHT_FRONT
-  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
   analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, HIGH);   
 
   //LEFT_REAR
-  //digitalWrite(LEFT_REAR_PWD, HIGH);  
   analogWrite(LEFT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, LOW);   
 
   //RIGHT_REAR
-  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
   analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, LOW);   
 
@@ -173,22 +163,18 @@ void left(){
   sendMsg("Call Left", true, "debug");
 
   //LEFT_FRONT
-  // digitalWrite(LEFT_FRONT_PWD, HIGH);  
   analogWrite(LEFT_FRONT_PWD, velocity);
   digitalWrite(LEFT_FRONT_DIR, HIGH);   
 
   //RIGHT_FRONT
-  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
   analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
 
   //LEFT_REAR
-  //digitalWrite(LEFT_REAR_PWD, HIGH);  
   analogWrite(LEFT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, LOW);   
 
   //RIGHT_REAR
-  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
   analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, HIGH);   
 
@@ -200,22 +186,18 @@ void right(){
   sendMsg("Call Right", true, "debug");
 
   //LEFT_FRONT
-  //  digitalWrite(LEFT_FRONT_PWD, HIGH);  
   analogWrite(LEFT_FRONT_PWD, velocity);
   digitalWrite(LEFT_FRONT_DIR, LOW);   
 
   //RIGHT_FRONT
-  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
   analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, HIGH);   
 
   //LEFT_REAR
-  // digitalWrite(RIGHT_REAR_PWD, HIGH);  
   analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, HIGH);   
 
   //RIGHT_REAR
-  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
   analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, LOW);   
 
@@ -227,22 +209,18 @@ void back(){
   sendMsg("Call Back", true, "debug");
 
   //LEFT_FRONT
-  //digitalWrite(LEFT_FRONT_PWD, HIGH);  
   analogWrite(LEFT_FRONT_PWD, velocity);
   digitalWrite(LEFT_FRONT_DIR, LOW);   
 
   //RIGHT_FRONT
-  //digitalWrite(RIGHT_FRONT_PWD, HIGH);  
   analogWrite(RIGHT_FRONT_PWD, velocity);
   digitalWrite(RIGHT_FRONT_DIR, LOW);   
 
   //LEFT_REAR
-  //digitalWrite(LEFT_REAR_PWD, HIGH);  
   analogWrite(LEFT_REAR_PWD, velocity);
   digitalWrite(LEFT_REAR_DIR, HIGH);   
 
   //RIGHT_REAR
-  //digitalWrite(RIGHT_REAR_PWD, HIGH);  
   analogWrite(RIGHT_REAR_PWD, velocity);
   digitalWrite(RIGHT_REAR_DIR, HIGH);   
 
@@ -285,13 +263,10 @@ int limitCamLR(int camLR){
   else if(camLR <= 0){
     camLR = 0;
   }
-
   return camLR;
-
 }
 
 int limitCamUD(int camUD){
-
 
   if(camUD >= 160){
     camUD = 160;
@@ -313,7 +288,9 @@ void help(){
   h += "[+] Acc -";
   h += "[-] Dec -";
   h += "[V] Vel Act";
+  h += "[M] Cam max left -";
   h += "[T] Cam left -";
+  h += "[N] Cam max right -";
   h += "[Y] Cam right -";
   h += "[Q] Cam down -";
   h += "[A] Cam up -";
@@ -373,9 +350,19 @@ void loop(){
       delay(50);                
       break;
 
+    case 'M' :
+      camLR = camLeft(10);
+      delay(50);                
+      break;
+
     case 'Y' :
       camLR = camRight(camLR);
       delay(50);
+      break;
+
+    case 'N' :
+      camLR = camRight(170);
+      delay(50);                
       break;
 
     case 'A' :
@@ -404,6 +391,7 @@ void loop(){
       camUD = camDown(camUD);
       delay(50);
       break;
+
 
     case 'C' :
       check();
@@ -435,13 +423,3 @@ void loop(){
     }
   }
 }
-
-
-
-
-
-
-
-
-
-

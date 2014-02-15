@@ -116,3 +116,4 @@ TO DO
 - configure gyro
 - test on mobile phone
 - change raspberry to hotspot wifi.
+- add ping sensor
