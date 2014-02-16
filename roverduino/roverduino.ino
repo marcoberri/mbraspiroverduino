@@ -1,37 +1,43 @@
+
 /*
 Autor: Marco Berri marcoberri@gmail.com 
-Web Author : http://tecnicume.blogspot.it
-Project: https://github.com/marcoberri/mbraspiroverduino 
-*/
+ Web Author : http://tecnicume.blogspot.it
+ Project: https://github.com/marcoberri/mbraspiroverduino 
+ */
 
 #include <Servo.h>
 #include <ctype.h> 
+#include <NewPing.h>
 
-static int LEFT_FRONT_PWD = 3; //support analogwrite modulation
-static int LEFT_FRONT_DIR = 2;
+const  short LEFT_FRONT_PWD = 3; //support analogwrite modulation
+const  short LEFT_FRONT_DIR = 2;
 
-static int RIGHT_FRONT_PWD = 5; //support analogwrite modulation
-static int RIGHT_FRONT_DIR = 4;
+const  short RIGHT_FRONT_PWD = 5; //support analogwrite modulation
+const  short RIGHT_FRONT_DIR = 4;
 
-static int LEFT_REAR_PWD = 6; //support analogwrite modulation
-static int LEFT_REAR_DIR = 7;
+const  short LEFT_REAR_PWD = 6; //support analogwrite modulation
+const  short LEFT_REAR_DIR = 7;
 
-static int RIGHT_REAR_PWD = 9; //support analogwrite modulation
-static int RIGHT_REAR_DIR = 8;
+const  short RIGHT_REAR_PWD = 9; //support analogwrite modulation
+const  short RIGHT_REAR_DIR = 8;
 
-static int CAM_LR = 13;
-static int CAM_UD = 12;
+const  short CAM_LR = 13;
+const  short CAM_UD = 12;
 
-static int camLR = 90;
-static int camUD = 90;
+static short camLR = 90;
+static short camUD = 90;
+
+const  short TRIGGER_PIN = 0;
+const  short ECHO_PIN = 0;
+const  short MAX_DISTANCE = 200;
 
 Servo servoLR,servoUD;
+static short velocity = 100;
 
-static int velocity = 100;
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
 
 void setup()
 {
-
   Serial.begin(9600);  
 
   pinMode(LEFT_FRONT_PWD, OUTPUT);
@@ -255,7 +261,7 @@ void sendMsg(String message, boolean r, String type){
   Serial.println("{type:" + type + ",result:" + (String)r + ", message:'" +message+"'}");
 }
 
-int limitCamLR(int camLR){
+short limitCamLR(short camLR){
 
   if(camLR >= 180){
     camLR = 180;
@@ -266,7 +272,7 @@ int limitCamLR(int camLR){
   return camLR;
 }
 
-int limitCamUD(int camUD){
+short limitCamUD(short camUD){
 
   if(camUD >= 160){
     camUD = 160;
@@ -300,36 +306,41 @@ void help(){
 
 }
 
-int camLeft(int camLR){
+short camLeft(short camLR){
   sendMsg("Call Cam Left " + (String)camLR, true, "debug");
   camLR = camLR +10;
   servoLR.write(camLR);
   return camLR;
 }
 
-int camRight(int camLR){
+short camRight(short camLR){
   sendMsg("Call Cam Right " + (String)camLR, true, "debug");
   camLR = camLR - 10;
   servoLR.write(camLR);
   return camLR;
 }
 
-int camUp(int camUD){
+short camUp(short camUD){
   sendMsg("Call Cam Up " + (String)camUD, true, "debug");
   camUD = camUD -10;
   servoUD.write(camUD);
   return camUD;
 }
 
-int camDown(int camUD){
+short camDown(short camUD){
   sendMsg("Call Cam Down " + (String)camUD, true, "debug");
   camUD = camUD + 10;
   servoUD.write(camUD);
   return  camUD;
 }
 
+void ping(){
+  short uS = sonar.ping(); 
+  sendMsg((String)(uS / US_ROUNDTRIP_CM), true, "ping");
+}
 void loop(){
 
+  ping(); 
   camUD = limitCamUD(camUD);
   camLR = limitCamLR(camLR);
 
@@ -423,3 +434,4 @@ void loop(){
     }
   }
 }
+

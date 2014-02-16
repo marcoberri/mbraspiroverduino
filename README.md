@@ -20,6 +20,7 @@ Hardware
 - <a href="http://www.ebay.it/itm/130995862894?ssPageName=STRK:MEWNX:IT&_trksid=p3984.m1497.l2649">Snap Clip 9V Battery</a>
 - <a href="http://www.ebay.it/itm/Arduino-Breadboard-Jumper-Cable-Wires-65-Cable-Pack-/140922066946">Jumper Cable</a>
 - MPU6050
+- HC-SR04
 
 App Configuration
 --------------
@@ -41,29 +42,28 @@ TO DO
 HW Configuration
 --------------
 
-Arduino
+Arduino Library
+<a href="https://code.google.com/p/arduino-new-ping/">ping HC-SR04</a>
 
-- LEFT_FRONT
+Arduino Pin
 
+LEFT_FRONT Motor
 Pin 3 - CHANNEL 1 PWD PIN - analogwrite modulation
 Pin 2 - CHANNEL 1 DIR PIN
 
-- RIGHT_FRONT
-
+RIGHT_FRONT Motor
 Pin 5 - CHANNEL 3 PWD PIN - analogwrite modulation
 Pin 4 - CHANNEL 3 DIR PIN
 
-- LEFT_REAR
-
+LEFT_REAR Motor
 Pin 6 - CHANNEL 2 PWD PIN - analogwrite modulation
 Pin 7 - CHANNEL 2 DIR PIN
 
-- RIGHT_REAR
-
+RIGHT_REAR Motor
 Pin 9 - CHANNEL 4 PWD PIN - analogwrite modulation
 Pin 8 - CHANNEL 4 DIR PIN
 
-- Cam Tilt
+Cam Tilt pannel
 Pin 13 - Left-Right
 Pin 12 - Upper-Down
 
@@ -71,8 +71,6 @@ Pin 12 - Upper-Down
 
 Expansion Plate
 - Cut expansion plate with two holes under the engine controller to pass the 4 motor connectors
-
-TO DO ADD IMAGE
 
 TO DO
 
