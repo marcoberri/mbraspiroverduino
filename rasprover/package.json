@@ -21,7 +21,7 @@
  		"email" : "marcoberri@gmail.com"
 	},
   "dependencies": {
-		"express": "latest",
+		"express": "3.x",
 		"express.io": "latest",
 		 "socket.io" : "latest",
 		"serialport":"latest",
