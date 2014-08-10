@@ -27,8 +27,8 @@ const  short CAM_UD = 12;
 static short camLR = 90;
 static short camUD = 90;
 
-const  short TRIGGER_PIN = 0;
-const  short ECHO_PIN = 0;
+const  short TRIGGER_PIN = 11;
+const  short ECHO_PIN = 10;
 const  short MAX_DISTANCE = 200;
 
 Servo servoLR,servoUD;
@@ -342,6 +342,7 @@ void pingFront(){
   short uS = sonar.ping(); 
   sendMsg((String)(uS / US_ROUNDTRIP_CM), true, "ping-front");
 }
+
 void loop(){
 
   pingFront(); 
