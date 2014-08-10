@@ -262,7 +262,7 @@ void sendMsg(String message, boolean r, String type){
   if(r == false)
     r_string = "false"; 
     
-  Serial.println("{\"type\":\"" + type + "\",\"result\":" + r_string + ", message:\"" +message+"\"}");
+  Serial.println("{\"type\":\"" + type + "\",\"result\":" + r_string + ", \"message\":\"" +message+"\"}");
 }
 
 short limitCamLR(short camLR){
