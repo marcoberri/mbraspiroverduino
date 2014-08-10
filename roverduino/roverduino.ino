@@ -258,7 +258,11 @@ void stop(){
 }
 
 void sendMsg(String message, boolean r, String type){
-  Serial.println("{type:" + type + ",result:" + (String)r + ", message:'" +message+"'}");
+  String r_string = "true";
+  if(r == false)
+    r_string = "false"; 
+    
+  Serial.println("{\"type\":\"" + type + "\",\"result\":" + r_string + ", message:\"" +message+"\"}");
 }
 
 short limitCamLR(short camLR){
@@ -334,13 +338,13 @@ short camDown(short camUD){
   return  camUD;
 }
 
-void ping(){
+void pingFront(){
   short uS = sonar.ping(); 
-  sendMsg((String)(uS / US_ROUNDTRIP_CM), true, "ping");
+  sendMsg((String)(uS / US_ROUNDTRIP_CM), true, "ping-front");
 }
 void loop(){
 
-  ping(); 
+  pingFront(); 
   camUD = limitCamUD(camUD);
   camLR = limitCamLR(camLR);
 
@@ -434,4 +438,3 @@ void loop(){
     }
   }
 }
-
