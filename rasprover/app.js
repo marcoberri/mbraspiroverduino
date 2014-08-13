@@ -8,7 +8,7 @@ var routesHome = require('./app/routes/');
 var routesMove = require('./app/routes/move');
 var routesCam = require('./app/routes/cam');
 var routesSystem = require('./app/routes/system');
-
+var serialBinder = require('./app/data/serialBinder.js')
 var app = express();
 
 app.set('port', config.web.port);
@@ -77,11 +77,10 @@ app.io.route('/mpu6050/getMotion', routesMpu6050.getMotion);
 //System
 app.io.route('/system/check',routesSystem.check);
 
-
-
 app.io.sockets.on('connection', function (socket) {
     logger.info('A socket server connected!');
-    socket.emit('log', {message: "A socket server "+ app.get('port')+ " connected ", calling: "-", type: 'conn'});
+    socket.emit('log', {"message": "A socket server "+ app.get('port')+ " connected ", "calling": "-", "type": 'conn'});
+    serialBinder.initConnection(socket);    
 });
 
 app.listen(app.get('port'),function() {

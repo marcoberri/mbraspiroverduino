@@ -11,8 +11,7 @@ var config = require('../conf/');
       req.io.emit('mpu6050', {message:[100,100,100,100], error : '',calling: '',type: 'mpu6050'});  
     }else{
       if(mpu.testConnection()){
-      req.io.emit('mpu6050', {message: mpu.getRotation(), error : '',calling: '',type: 'mpu6050'});
-    //  mpu.setSleepEnabled(1);
+       req.io.emit('mpu6050', {message: mpu.getRotation(), error : '',calling: '',type: 'mpu6050'});
       }
     }
 
@@ -23,8 +22,7 @@ var config = require('../conf/');
       req.io.emit('mpu6050', {message:[100,100,100,100,100,100], error : '',calling: 'Motion',type: 'mpu6050'});  
     }else{  
       if(mpu.testConnection()){
-      req.io.emit('mpu6050', {message: mpu.getMotion6(), error : '',calling: '',type: 'mpu6050'});
-       //     mpu.setSleepEnabled(1);
+       req.io.emit('mpu6050', {message: mpu.getMotion6(), error : '',calling: '',type: 'mpu6050'});
       }
     }
   };

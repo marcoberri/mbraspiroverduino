@@ -20,6 +20,26 @@
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
+
+	Math.degrees = function(rad){
+ 		return rad*(180/Math.PI);
+ 	};
+
+	function dist(a,b){
+    		return Math.sqrt((a*a)+(b*b));
+	};
+
+	function get_x_rotation(x,y,z){
+		radians = Math.atan2(y, dist(x,z));
+    		return Math.degrees(radians);
+	};
+
+	function get_y_rotation(x,y,z){
+		radians = Math.atan2(x, dist(y,z));
+		return -Math.degrees(radians);
+	};
+
+
 	var socket = io.connect('<%=config.web.host%>');
 
 	socket.on('log', function(data) {
@@ -43,16 +63,24 @@
 
 	socket.on('mpu6050', function(data) {
 		var message = data.message;
-		$('#accx').val(message[0]);	
-		$('#accy').val(message[1]);	
-		$('#accz').val(message[2]);	
 
-		$('#motx').val(message[3]);	
-		$('#moty').val(message[4]);	
-		$('#motz').val(message[5]);	
+		$('#accx').val(message[0] / 16384.0);	
+		$('#accy').val(message[1] / 16384.0);	
+		$('#accz').val(message[2] / 16384.0);	
+
+		$('#motx').val(message[3] / 130);	
+		$('#moty').val(message[4] / 130);	
+		$('#motz').val(message[5] / 130);	
+
+		$('#rotx').val(get_x_rotation( (message[0] / 16384.0), (message[1] / 16384.0), (message[2] / 16384.0) ) );	
+		$('#roty').val(get_y_rotation( (message[0] / 16384.0), (message[1] / 16384.0), (message[2] / 16384.0) ) );
 
 	});
-	
+
+	socket.on('ping-front',function(data){
+		$('#ping-front').val(data.message);
+	});	
+
 	function sendCamData(op){
 		socket.emit('/cam/' +op);
 	};
@@ -72,7 +100,7 @@
 	};
 	
 
-	var mpu6050 = setInterval(function(){getMpu6050()},2000);
+	var mpu6050 = setInterval(function(){getMpu6050()},3000);
 
 	function getMpu6050() {
 		socket.emit('/mpu6050/getMotion');
@@ -151,6 +179,7 @@
 
 		
 		<div class="col-md-8">
+
 			<img src="<%=config.web.cam%>/?action=stream" class="img-rounded"/>
 
 				<form id="formMpu6050" class="form-inline" role="form" >
@@ -186,12 +215,28 @@
 					  <input type="text" class="form-control" id="moty" disabled/>					
 					</div>
 				  </div>	
+		
 				  <div class="col-xs-2">
 					<div class="form-group">
 					  <label for="motz">Mot z</label>
 					  <input type="text" class="form-control" id="motz" disabled/>					
 					</div>
 	                         </div>
+
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="rotx">Rotation x</label>
+					  <input type="text" class="form-control" id="rotx" disabled/>					
+					</div>
+
+				 </div>
+				  <div class="col-xs-2">
+					<div class="form-group">
+					  <label for="roty">Rotation y</label>
+					  <input type="text" class="form-control" id="roty" disabled/>					
+					</div>
+				  </div>	
+		
 				</div>
 
 				</form>
@@ -209,3 +254,4 @@
   
   </body>
 </html>
+

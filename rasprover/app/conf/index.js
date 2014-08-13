@@ -23,7 +23,7 @@ config.web.cam = 'http://192.168.1.12:9000';
 /*******************************/
 
 config.raspi = {};
-config.raspi.port = '/dev/ttyACM0';
+config.raspi.port = '/dev/ttyAMA0';
 
 //se true non vengono fatte le chiamate ad arduino
 config.raspi.test = false; //prod
