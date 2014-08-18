@@ -27,14 +27,16 @@ const  short CAM_UD = 12;
 static short camLR = 90;
 static short camUD = 90;
 
-const  short TRIGGER_PIN = 11;
-const  short ECHO_PIN = 10;
-const  short MAX_DISTANCE = 200;
+const  short TRIGGER_PIN_FRONT = 11;
+const  short ECHO_PIN_FRONT = 10;
+const  short MAX_DISTANCE_FRONT = 200; //in cm
+short cacheFront = 0;
+
 
 Servo servoLR,servoUD;
 static short velocity = 100;
 
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+NewPing sonar(TRIGGER_PIN_FRONT, ECHO_PIN_FRONT, MAX_DISTANCE_FRONT);
 
 void setup()
 {
@@ -57,7 +59,6 @@ void setup()
 
   pinMode(CAM_UD,OUTPUT);
   servoUD.attach(CAM_UD);
-
 
   Serial.println("SETUP COMPLETE");
 }
@@ -261,7 +262,7 @@ void sendMsg(String message, boolean r, String type){
   String r_string = "true";
   if(r == false)
     r_string = "false"; 
-    
+
   Serial.println("{\"type\":\"" + type + "\",\"result\":" + r_string + ", \"message\":\"" +message+"\"}");
 }
 
@@ -290,22 +291,23 @@ short limitCamUD(short camUD){
 
 
 void help(){
-  String h = "[F] Forward -";
-  h += "[L] Left -";
-  h += "[R] Right -";
-  h += "[B] Back -";
-  h += "[S] Stop -";
-  h += "[+] Acc -";
-  h += "[-] Dec -";
-  h += "[V] Vel Act";
-  h += "[M] Cam max left -";
-  h += "[T] Cam left -";
-  h += "[N] Cam max right -";
-  h += "[Y] Cam right -";
-  h += "[Q] Cam down -";
-  h += "[A] Cam up -";
-  h += "[U] Cam reset -";
-  h += "[H] Help";
+  String h = "{\"F\":\"Forward\",";
+  h += "\"L\":\"Left\",";
+  h += "\"R\":\"Right\",";
+  h += "\"B\":\"Back\",";
+  h += "\"S\":\"Stop\",";
+  h += "\"+\":\"Acc\",";
+  h += "\"-\":\"Dec\",";
+  h += "\"V\":\"Vel Act\",";
+  h += "\"M\":\"Cam max left\",";
+  h += "\"T\":\"Cam left\",";
+  h += "\"N\":\"Cam max right\",";
+  h += "\"Y\":\"Cam right\",";
+  h += "\"Q\":\"Cam down\",";
+  h += "\"A\":\"Cam up\",";
+  h += "\"U\":\"Cam reset\",";
+  h += "\"C\":\"Check\",";
+  h += "\"H\":\"Help\"}";
   sendMsg(h, true, "info");
 
 }
@@ -339,8 +341,11 @@ short camDown(short camUD){
 }
 
 void pingFront(){
-  short uS = sonar.ping(); 
-  sendMsg((String)(uS / US_ROUNDTRIP_CM), true, "ping-front");
+  short uS = sonar.ping();
+  if(cacheFront != uS){ 
+    cacheFront = uS;
+    sendMsg((String)(uS / US_ROUNDTRIP_CM), true, "ping-front");
+  }
 }
 
 void loop(){
