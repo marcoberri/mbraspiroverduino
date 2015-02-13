@@ -355,6 +355,7 @@ void help() {
   h += "\"A\":\"Cam up\",";
   h += "\"U\":\"Cam reset\",";
   h += "\"C\":\"Check\",";
+  h += "\"G\":\"Gyro/Acc\",";
   h += "\"H\":\"Help\"}";
   sendMsg(h, true, "info");
 
