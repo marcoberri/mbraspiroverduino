@@ -12,5 +12,7 @@ https://code.google.com/p/arduino-new-ping/downloads/detail?name=NewPing_v1.5.zi
 
 https://github.com/jrowberg/i2cdevlib/zipball/master
 
+http://diyhacking.com/projects/I2Cdev.zip
+
 
 
